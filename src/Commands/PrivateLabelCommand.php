@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Mach3builders\PrivateLabel\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class PrivateLabelCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-privatelabel';
 
     public $description = 'My command';
 

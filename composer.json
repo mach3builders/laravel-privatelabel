@@ -1,22 +1,21 @@
 {
-    "name": "vendor_slug/package_slug",
-    "description": ":package_description",
+    "name": "mach3builders/laravel-privatelabel",
+    "description": "Add private label functionality to mach3laravel applications",
     "keywords": [
-        ":vendor_name",
+        "mach3builders",
         "laravel",
-        "package_slug"
+        "laravel-privatelabel"
     ],
-    "homepage": "https://github.com/vendor_slug/package_slug",
+    "homepage": "https://github.com/mach3builders/laravel-privatelabel",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
-            "role": "Developer"
+            "name": "Jasper Helmich",
+            "email": "jasper.helmich@gmail.com"
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^7.3",
         "spatie/laravel-package-tools": "^1.4.3",
         "illuminate/contracts": "^8.37"
     },
@@ -24,19 +23,17 @@
         "brianium/paratest": "^6.2",
         "nunomaduro/collision": "^5.3",
         "orchestra/testbench": "^6.15",
-        "phpunit/phpunit": "^9.3",
-        "spatie/laravel-ray": "^1.9",
-        "vimeo/psalm": "^4.4"
+        "phpunit/phpunit": "^9.3"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Mach3builders\\PrivateLabel\\": "src",
+            "Mach3builders\\PrivateLabel\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Mach3builders\\PrivateLabel\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -50,10 +47,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Mach3builders\\PrivateLabel\\PrivateLabelServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\SkeletonFacade"
+                "PrivateLabel": "Mach3builders\\PrivateLabel\\PrivateLabelFacade"
             }
         }
     },

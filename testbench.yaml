@@ -1,2 +1,2 @@
 providers:
-  - VendorName\Skeleton\SkeletonServiceProvider
+  - Mach3builders\PrivateLabel\PrivateLabelServiceProvider

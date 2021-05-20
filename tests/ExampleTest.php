@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Mach3builders\PrivateLabel\Tests;
 
 class ExampleTest extends TestCase
 {
