@@ -5,6 +5,7 @@ namespace Mach3builders\PrivateLabel;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Mach3builders\PrivateLabel\Commands\PrivateLabelCommand;
+use Mach3builders\PrivateLabel\Interfaces\OwnsPrivateLabel;
 
 class PrivateLabelServiceProvider extends PackageServiceProvider
 {
@@ -16,6 +17,6 @@ class PrivateLabelServiceProvider extends PackageServiceProvider
             ->hasRoutes('web')
             ->hasViews()
             ->hasMigration('create_privatelabel_table')
-            ->hasCommand(PrivateLabelCommand::class);
+            ->hasTranslations();
     }
 }

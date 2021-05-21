@@ -3,13 +3,24 @@
 namespace Mach3builders\PrivateLabel\Http\Controllers;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Gate;
 use Mach3builders\PrivateLabel\Jobs\InstallSite;
 use Mach3builders\PrivateLabel\PrivateLabelFacade;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Mach3builders\PrivateLabel\Http\Requests\UpdatePrivateLabelRequest as RequestsUpdatePrivateLabelRequest;
+use Mach3builders\PrivateLabel\Http\Requests\UpdatePrivateLabelRequest;
 
 class PrivateLabelController extends Controller
 {
+    public function __construct()
+    {
+        // @TODO
+        // $this->middleware(function ($request, $next) {
+        //     abort_unless(Gate::allows('viewPrivateLabel'), 403);
+
+        //     return $next($request);
+        // });
+    }
+
     public function index(int $owner_id)
     {
         // @TODO gate
@@ -22,7 +33,7 @@ class PrivateLabelController extends Controller
         return view('privatelabel::index', compact('private_label', 'owner'));
     }
 
-    public function update(RequestsUpdatePrivateLabelRequest $request, int $owner_id)
+    public function update(UpdatePrivateLabelRequest $request, int $owner_id)
     {
         $private_label = PrivateLabelFacade::findOwnerById($owner_id)->privateLabel()->updateOrCreate(
             [],
