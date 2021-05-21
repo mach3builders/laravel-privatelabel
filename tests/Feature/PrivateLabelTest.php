@@ -8,11 +8,10 @@ use Illuminate\Support\Facades\Storage;
 use Mach3builders\PrivateLabel\Jobs\InstallSite;
 use Mach3builders\PrivateLabel\Models\PrivateLabel;
 use Mach3builders\PrivateLabel\Tests\Fixtures\Owner;
-use Mach3builders\PrivateLabel\Tests\Feature\FeatureTestCase;
 
 class PrivateLabelTest extends FeatureTestCase
 {
-    private function validData($data = []): Array
+    private function validData($data = []): array
     {
         return array_merge([
             'domain' => 'www.mach3builders.nl',

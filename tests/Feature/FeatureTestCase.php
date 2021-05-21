@@ -4,8 +4,6 @@ namespace Mach3builders\PrivateLabel\Tests\Feature;
 
 use Mach3builders\PrivateLabel\Tests\TestCase;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
-use Mach3builders\PrivateLabel\Tests\Fixtures\Owner;
 
 class FeatureTestCase extends TestCase
 {
