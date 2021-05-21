@@ -62,23 +62,17 @@ echo $laravel-privatelabel->echoPhrase('Hello, Spatie!');
 composer test
 ```
 
+## Roadmap
+- [ ] Setup tests
+- [ ] Make parent model config
+- [ ] Test job
+- [ ] Make sure all test runs
+- [ ] Write install instructions
+- [ ] Add it to a project
+- [ ] Release v0.9
+- [ ] Add the changes from asana
+- [ ] Release v1
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-## Contributing
-
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
-
-## Credits
-
-- [Jasper Helmich](https://github.com/mach3builders)
-- [All Contributors](../../contributors)
-
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

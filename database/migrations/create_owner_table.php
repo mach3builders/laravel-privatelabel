@@ -4,15 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateOwnerTable extends Migration
 {
     public function up()
     {
-        Schema::create('laravel-privatelabel_table', function (Blueprint $table) {
+        Schema::create('owners', function (Blueprint $table) {
             $table->id();
-
-            // add fields
-
+            $table->string('name');
             $table->timestamps();
         });
     }

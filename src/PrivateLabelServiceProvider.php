@@ -10,16 +10,12 @@ class PrivateLabelServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
         $package
             ->name('laravel-privatelabel')
             ->hasConfigFile()
+            ->hasRoutes('web')
             ->hasViews()
-            ->hasMigration('create_laravel-privatelabel_table')
+            ->hasMigration('create_privatelabel_table')
             ->hasCommand(PrivateLabelCommand::class);
     }
 }

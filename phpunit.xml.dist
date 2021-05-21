@@ -33,7 +33,7 @@
             <clover outputFile="build/logs/clover.xml"/>
         </report>
     </coverage>
-    <logging>
-        <junit outputFile="build/report.junit.xml"/>
-    </logging>
+    <php>
+        <server name="APP_ENV" value="testing"/>
+    </php>
 </phpunit>

@@ -11,6 +11,6 @@ class PrivateLabelFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'laravel-privatelabel';
+        return \Mach3builders\PrivateLabel\PrivateLabel::class;
     }
 }
