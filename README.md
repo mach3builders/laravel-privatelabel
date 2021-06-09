@@ -72,6 +72,7 @@ composer test
 - [ ] Release v0.9
 - [ ] Add the changes from asana
 - [ ] Release v1
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.

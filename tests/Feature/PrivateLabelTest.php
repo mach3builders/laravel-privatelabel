@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Mach3builders\PrivateLabel\Jobs\InstallSite;
 use Mach3builders\PrivateLabel\Models\PrivateLabel;
 use Mach3builders\PrivateLabel\Tests\Fixtures\Owner;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class PrivateLabelTest extends FeatureTestCase
 {
@@ -99,13 +100,15 @@ class PrivateLabelTest extends FeatureTestCase
     {
         Storage::fake();
 
-        $account = Account::factory()
-            ->create();
+        $owner = Owner::factory()->create();
+        $private_label = PrivateLabel::factory()->state(['owner_id' => $owner->id])->create();
 
-        $private_label = PrivateLabel::factory()
-            ->create(['account_id' => $account->id]);
+        $this->patch('app/private-label/'. $owner->id, $this->validData())
+            ->assertRedirect()
+            ->assertSessionHasNoErrors();
 
-        $media = $private_label->addMedia(UploadedFile::fake()->create('dark.jpg', 500))->toMediaCollection('logo_dark');
+        $media = Media::create();
+        // $media = $private_label->addMedia(UploadedFile::fake()->create('dark.jpg', 500))->toMediaCollection('logo_dark');
 
         $this->get("app/private-label/delete-media/{$media->id}")
             ->assertStatus(403);
@@ -115,8 +118,6 @@ class PrivateLabelTest extends FeatureTestCase
     public function can_delete_media()
     {
         Storage::fake();
-
-        $this->signIn();
 
         $private_label = PrivateLabel::factory()->create(['account_id' => account()->id]);
         $media = $private_label->addMedia(UploadedFile::fake()->create('dark.jpg', 500))->toMediaCollection('logo_dark');
