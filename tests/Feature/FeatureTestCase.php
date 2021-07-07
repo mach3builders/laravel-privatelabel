@@ -2,8 +2,6 @@
 
 namespace Mach3builders\PrivateLabel\Tests\Feature;
 
-use Illuminate\Foundation\Auth\User;
-use Illuminate\Support\Facades\Gate;
 use Mach3builders\PrivateLabel\Tests\TestCase;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
