@@ -15,4 +15,18 @@ return [
      * Middleware the private label route should live under
      */
     'middleware' => ['web', 'auth'],
+
+    /**
+     * The domain every label needs to be cnamed to
+     */
+    'domain' => env('PRIVATE_LABEL_DOMAIN'),
+
+    /**
+     * Forge information
+     */
+    'forge' => [
+        'api_token' => env('FORGE_API_TOKEN'),
+        'server_id' => env('FORGE_SERVER_ID'),
+        'server_ip' => env('FORGE_SERVER_IP'),
+    ],
 ];
