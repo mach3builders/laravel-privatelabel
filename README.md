@@ -99,8 +99,8 @@ composer test
 ## Roadmap
 - [x] Setup tests
 - [x] Make parent model config
-- [ ] Test job
-- [ ] Make sure all test runs
+- [x] Test job
+- [x] Make sure all test runs
 - [ ] Write install instructions
 - [ ] Add it to a project
 - [ ] Release v0.9
