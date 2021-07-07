@@ -17,6 +17,11 @@ return [
     'middleware' => ['web', 'auth'],
 
     /**
+     * The prefix used inside the route group
+     */
+    'route_prefix' => 'app',
+
+    /**
      * The domain every label needs to be cnamed to
      */
     'domain' => env('PRIVATE_LABEL_DOMAIN'),

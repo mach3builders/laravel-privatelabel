@@ -78,7 +78,6 @@ FORGE_API_TOKEN=
 FORGE_SERVER_IP=
 ```
 
-
 ## Usage
 
 ```php
@@ -93,8 +92,8 @@ composer test
 ```
 
 ## Roadmap
-- [ ] Setup tests
-- [ ] Make parent model config
+- [x] Setup tests
+- [x] Make parent model config
 - [ ] Test job
 - [ ] Make sure all test runs
 - [ ] Write install instructions

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Mach3builders\PrivateLabel\Http\Controllers\PrivateLabelController;
 
 // Private label
-Route::prefix('app')->middleware(config('private-label.middleware'))->group(function(){
+Route::prefix(config('private-label.route_prefix'))->middleware(config('private-label.middleware'))->group(function(){
     Route::get('private-label/{owner_id}', [PrivateLabelController::class, 'index'])->name('private-label.index');
     Route::patch('private-label/{owner_id}', [PrivateLabelController::class, 'update'])->name('private-label.update');
 
