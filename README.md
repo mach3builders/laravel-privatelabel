@@ -5,13 +5,6 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/mach3builders/laravel-privatelabel/Check%20&%20fix%20styling?label=code%20style)](https://github.com/mach3builders/laravel-privatelabel/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/mach3builders/laravel-privatelabel.svg?style=flat-square)](https://packagist.org/packages/mach3builders/laravel-privatelabel)
 
----
-2. Run "./configure-laravel-privatelabel.sh" to run a script that will replace all placeholders throughout all the files
-3. Remove this block of text.
-4. Have fun creating your package.
-5. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-
 This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
 ## Support us
@@ -46,8 +39,45 @@ This is the contents of the published config file:
 
 ```php
 return [
+    /**
+     * The owner model of the private label
+     */
+    'owner_model' => App\Models\Account::class,
+
+    /**
+     * The layout the extend the views off
+     */
+    'extend_layout' => 'privatelabel::layout',
+
+    /**
+     * Middleware the private label route should live under
+     */
+    'middleware' => ['web', 'auth'],
+
+    /**
+     * The domain every label needs to be cnamed to
+     */
+    'domain' => env('PRIVATE_LABEL_DOMAIN'),
+
+    /**
+     * Forge information
+     */
+    'forge' => [
+        'api_token' => env('FORGE_API_TOKEN'),
+        'server_id' => env('FORGE_SERVER_ID'),
+        'server_ip' => env('FORGE_SERVER_IP'),
+    ],
 ];
 ```
+
+Add the following .env vars to your .env
+```env
+PRIVATE_LABEL_DOMAIN=
+FORGE_SERVER_ID=
+FORGE_API_TOKEN=
+FORGE_SERVER_IP=
+```
+
 
 ## Usage
 
