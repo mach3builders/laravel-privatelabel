@@ -11,21 +11,8 @@ use Mach3builders\PrivateLabel\Http\Requests\UpdatePrivateLabelRequest;
 
 class PrivateLabelController extends Controller
 {
-    public function __construct()
-    {
-        // @TODO
-        // $this->middleware(function ($request, $next) {
-        //     abort_unless(Gate::allows('viewPrivateLabel'), 403);
-
-        //     return $next($request);
-        // });
-    }
-
     public function index(int $owner_id)
     {
-        // @TODO gate
-        // $this->authorize('administer account');
-
         $owner = PrivateLabelFacade::findOwnerById($owner_id);
 
         $private_label = $owner->privateLabel()->firstOrNew();
@@ -40,17 +27,17 @@ class PrivateLabelController extends Controller
             $request->validated()
         );
 
-        // if ($request->file('logo_light')) {
-        //     $private_label->addMedia($request->file('logo_light'))->toMediaCollection('logo_light');
-        // }
+        if ($request->file('logo_light')) {
+            $private_label->addMedia($request->file('logo_light'))->toMediaCollection('logo_light');
+        }
 
-        // if ($request->file('logo_dark')) {
-        //     $private_label->addMedia($request->file('logo_dark'))->toMediaCollection('logo_dark');
-        // }
+        if ($request->file('logo_dark')) {
+            $private_label->addMedia($request->file('logo_dark'))->toMediaCollection('logo_dark');
+        }
 
-        // if ($request->file('favicon')) {
-        //     $private_label->addMedia($request->file('favicon'))->toMediaCollection('favicon');
-        // }
+        if ($request->file('favicon')) {
+            $private_label->addMedia($request->file('favicon'))->toMediaCollection('favicon');
+        }
 
         if ($private_label->wasRecentlyCreated) {
             $private_label->update([
@@ -63,24 +50,23 @@ class PrivateLabelController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \Spatie\MediaLibrary\MediaCollections\Models\Media
-     * @return \Illuminate\Http\Response
-     */
-    public function deleteMedia(Media $media)
+    public function deleteMedia(int $owner_id, int $media)
     {
-        abort_unless($media->model->is(account()->privateLabel), 403);
+        $owner = PrivateLabelFacade::findOwnerById($owner_id);
+        $media = Media::findOrFail($media);
+
+        abort_unless($media->model->owner->is($owner), 403);
 
         $media->delete();
 
         return back();
     }
 
-    public function poll()
+    public function poll(int $owner_id)
     {
-        $private_label = account()->privatelabel;
+        $owner = PrivateLabelFacade::findOwnerById($owner_id);
+
+        $private_label = $owner->privatelabel;
         $status_of_polling = $private_label->completedStatus('site_installed')
                                 ? 'done'
                                 : 'running';

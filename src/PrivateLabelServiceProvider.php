@@ -11,7 +11,7 @@ class PrivateLabelServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('laravel-privatelabel')
-            ->hasConfigFile()
+            ->hasConfigFile('private-label')
             ->hasRoutes('web')
             ->hasViews()
             ->hasMigration('create_privatelabel_table')

@@ -1,4 +1,4 @@
-@extends(config('privatelabel.extend_layout', null))
+@extends(config('private-label.extend_layout', null))
 
 @section('header')
     <div class="ui-heading">{{ __('privatelabel::private-label.private-label') }}</div>

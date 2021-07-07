@@ -32,7 +32,7 @@ class PrivateLabel extends Model implements HasMedia
 
     public function owner(): BelongsTo
     {
-        return $this->belongsTo(config('privatelabel.owner_model'), 'owner_id', 'id');
+        return $this->belongsTo(config('private-label.owner_model'), 'owner_id', 'id');
     }
 
     public function checkDns(): bool

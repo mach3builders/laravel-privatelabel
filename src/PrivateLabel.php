@@ -10,7 +10,7 @@ class PrivateLabel
             return;
         }
 
-        $model = config('privatelabel.owner_model');
+        $model = config('private-label.owner_model');
 
         return (new $model)->where('id', $owner_id)->first();
     }

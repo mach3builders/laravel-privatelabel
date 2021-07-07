@@ -8,7 +8,7 @@ class CreatePrivatelabelTable extends Migration
 {
     public function up()
     {
-        $model = config('privatelabel.owner_model');
+        $model = config('private-label.owner_model');
 
         Schema::create('private_labels', function (Blueprint $table) use ($model) {
             $table->id();

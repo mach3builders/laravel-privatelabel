@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Storage;
 use Mach3builders\PrivateLabel\Jobs\InstallSite;
 use Mach3builders\PrivateLabel\Models\PrivateLabel;
 use Mach3builders\PrivateLabel\Tests\Fixtures\Owner;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class PrivateLabelTest extends FeatureTestCase
 {
@@ -57,12 +56,11 @@ class PrivateLabelTest extends FeatureTestCase
 
         Queue::assertPushed(InstallSite::class);
 
-        // @TODO
-        // $private_label = $owner->privateLabel()->first();
+        $private_label = $owner->privateLabel()->first();
 
-        // $this->assertTrue($private_label->hasMedia('logo_light'));
-        // $this->assertTrue($private_label->hasMedia('logo_dark'));
-        // $this->assertTrue($private_label->hasMedia('favicon'));
+        $this->assertTrue($private_label->hasMedia('logo_light'));
+        $this->assertTrue($private_label->hasMedia('logo_dark'));
+        $this->assertTrue($private_label->hasMedia('favicon'));
     }
 
     /** @test */
@@ -87,12 +85,11 @@ class PrivateLabelTest extends FeatureTestCase
 
         Queue::assertNotPushed(InstallSite::class);
 
-        // @TODO
-        // $private_label = PrivateLabel::latest()->first();
+        $private_label = PrivateLabel::latest()->first();
 
-        // $this->assertTrue($private_label->hasMedia('logo_light'));
-        // $this->assertTrue($private_label->hasMedia('logo_dark'));
-        // $this->assertTrue($private_label->hasMedia('favicon'));
+        $this->assertTrue($private_label->hasMedia('logo_light'));
+        $this->assertTrue($private_label->hasMedia('logo_dark'));
+        $this->assertTrue($private_label->hasMedia('favicon'));
     }
 
     /** @test */
@@ -100,17 +97,15 @@ class PrivateLabelTest extends FeatureTestCase
     {
         Storage::fake();
 
-        $owner = Owner::factory()->create();
-        $private_label = PrivateLabel::factory()->state(['owner_id' => $owner->id])->create();
+        $this->withExceptionHandling();
 
-        $this->patch('app/private-label/'. $owner->id, $this->validData())
-            ->assertRedirect()
-            ->assertSessionHasNoErrors();
+        $owner1 = Owner::factory()->create();
+        $owner2 = Owner::factory()->create();
+        $private_label = PrivateLabel::factory()->state(['owner_id' => $owner2->id])->create();
 
-        $media = Media::create();
-        // $media = $private_label->addMedia(UploadedFile::fake()->create('dark.jpg', 500))->toMediaCollection('logo_dark');
+        $media = $private_label->addMedia(UploadedFile::fake()->create('dark.jpg', 500))->toMediaCollection('logo_dark');
 
-        $this->get("app/private-label/delete-media/{$media->id}")
+        $this->get("app/private-label/{$owner1->id}/delete-media/{$media->id}")
             ->assertStatus(403);
     }
 
@@ -119,12 +114,15 @@ class PrivateLabelTest extends FeatureTestCase
     {
         Storage::fake();
 
-        $private_label = PrivateLabel::factory()->create(['account_id' => account()->id]);
+        $owner = Owner::factory()->create();
+        $private_label = PrivateLabel::factory()->create(['owner_id' => $owner->id]);
         $media = $private_label->addMedia(UploadedFile::fake()->create('dark.jpg', 500))->toMediaCollection('logo_dark');
 
-        $this->get("app/private-label/delete-media/{$media->id}")
+        $this->get("app/private-label/{$owner->id}/delete-media/{$media->id}")
             ->assertRedirect();
 
         $this->assertFalse($private_label->hasMedia('logo_dark'));
+
+        $this->assertDatabaseCount('media', 0);
     }
 }

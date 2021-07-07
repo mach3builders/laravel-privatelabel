@@ -9,5 +9,10 @@ return [
     /**
      * The layout the extend the views off
      */
-    'extend_layout' => 'privatelabel::layout'
+    'extend_layout' => 'privatelabel::layout',
+
+    /**
+     * Middleware the private label route should live under
+     */
+    'middleware' => ['web', 'auth'],
 ];

@@ -10,6 +10,7 @@ abstract class TestCase extends OrchestraTestCase
     {
         return [
             \Mach3builders\PrivateLabel\PrivateLabelServiceProvider::class,
+            \Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
         ];
     }
 }
