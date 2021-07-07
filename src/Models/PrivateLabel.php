@@ -37,6 +37,10 @@ class PrivateLabel extends Model implements HasMedia
 
     public function checkDns(): bool
     {
+        if ($this->status != 'dns_validating') {
+            return true;
+        }
+
         return (bool) collect(dns_get_record($this->domain, DNS_CNAME))
             ->where('type', 'CNAME')
             ->where('target', config('private-label.domain'))

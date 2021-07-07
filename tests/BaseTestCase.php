@@ -1,11 +1,11 @@
 <?php
 
-namespace Mach3builders\PrivateLabel\Tests\Feature;
+namespace Mach3builders\PrivateLabel\Tests;
 
 use Mach3builders\PrivateLabel\Tests\TestCase;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class FeatureTestCase extends TestCase
+abstract class BaseTestCase extends TestCase
 {
     public function setUp(): void
     {
@@ -35,13 +35,13 @@ class FeatureTestCase extends TestCase
             'prefix' => '',
         ]);
 
-        include_once __DIR__.'/../../database/migrations/create_privatelabel_table.php';
+        include_once __DIR__.'/../database/migrations/create_privatelabel_table.php';
         (new \CreatePrivatelabelTable())->up();
 
-        include_once __DIR__.'/../../database/migrations/create_media_table.php';
+        include_once __DIR__.'/../database/migrations/create_media_table.php';
         (new \CreateMediaTable())->up();
 
-        include_once __DIR__.'/../../database/migrations/create_owner_table.php';
+        include_once __DIR__.'/../database/migrations/create_owner_table.php';
         (new \CreateOwnerTable())->up();
     }
 }
