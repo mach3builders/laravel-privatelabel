@@ -2,7 +2,6 @@
 
 namespace Mach3builders\PrivateLabel\Tests;
 
-use Mach3builders\PrivateLabel\Tests\TestCase;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 abstract class BaseTestCase extends TestCase

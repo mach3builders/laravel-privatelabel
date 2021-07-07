@@ -6,8 +6,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Mach3builders\PrivateLabel\Jobs\InstallSite;
-use Mach3builders\PrivateLabel\Models\PrivateLabel;
 use Mach3builders\PrivateLabel\Tests\BaseTestCase;
+use Mach3builders\PrivateLabel\Models\PrivateLabel;
 use Mach3builders\PrivateLabel\Tests\Fixtures\Owner;
 
 class PrivateLabelTest extends BaseTestCase
