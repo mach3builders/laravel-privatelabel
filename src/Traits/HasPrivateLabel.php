@@ -8,6 +8,6 @@ trait HasPrivateLabel
 {
     public function privateLabel(): HasOne
     {
-        return $this->hasOne(\Mach3builders\PrivateLabel\Models\PrivateLabel::class);
+        return $this->hasOne(\Mach3builders\PrivateLabel\Models\PrivateLabel::class, 'owner_id');
     }
 }

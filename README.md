@@ -1,19 +1,6 @@
 # Add private label functionality to mach3laravel applications
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/mach3builders/laravel-privatelabel.svg?style=flat-square)](https://packagist.org/packages/mach3builders/laravel-privatelabel)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/mach3builders/laravel-privatelabel/run-tests?label=tests)](https://github.com/mach3builders/laravel-privatelabel/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/mach3builders/laravel-privatelabel/Check%20&%20fix%20styling?label=code%20style)](https://github.com/mach3builders/laravel-privatelabel/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/mach3builders/laravel-privatelabel.svg?style=flat-square)](https://packagist.org/packages/mach3builders/laravel-privatelabel)
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-privatelabel.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-privatelabel)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+This is a package made for the laravel start of mach3builders, the package assumes the laravel-starter template has been used to create the project.
 
 ## Installation
 
@@ -23,16 +10,15 @@ You can install the package via composer:
 composer require mach3builders/laravel-privatelabel
 ```
 
-You can publish and run the migrations with:
+Publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --provider="Mach3builders\PrivateLabel\PrivateLabelServiceProvider" --tag="laravel-privatelabel-migrations"
-php artisan migrate
+php artisan vendor:publish --provider="Mach3builders\PrivateLabel\PrivateLabelServiceProvider" --tag="privatelabel-migrations"
 ```
 
-You can publish the config file with:
+Publish the config file with:
 ```bash
-php artisan vendor:publish --provider="Mach3builders\PrivateLabel\PrivateLabelServiceProvider" --tag="laravel-privatelabel-config"
+php artisan vendor:publish --provider="Mach3builders\PrivateLabel\PrivateLabelServiceProvider" --tag="privatelabel-config"
 ```
 
 This is the contents of the published config file:
@@ -83,11 +69,31 @@ FORGE_API_TOKEN=
 FORGE_SERVER_IP=
 ```
 
+Migrate the database
+
+```bash
+php artisan migrate
+```
+
 ## Usage
 
+Place the index route in the menu
+```html
+    <li class="nav-item">
+        <a href="{{ route('private-label.index', {REPLACE_WITH_OWNER_MODEL}) }}" class="nav-link{{ Route::is('private-label.*') ? ' active' : '' }}">
+            <span class="ui-icon-text">
+                <i class="far fa-tag"></i>
+                <span>{{ _('Private label') }}</span>
+            </span>
+        </a>
+    </li>
+```
+
+Add the the followin trait to the owner model of the config
 ```php
-$laravel-privatelabel = new Mach3builders\PrivateLabel();
-echo $laravel-privatelabel->echoPhrase('Hello, Spatie!');
+use Mach3builders\PrivateLabel\Traits\HasPrivateLabel;
+
+use HasPrivateLabel;
 ```
 
 ## Testing
@@ -101,8 +107,8 @@ composer test
 - [x] Make parent model config
 - [x] Test job
 - [x] Make sure all test runs
-- [ ] Write install instructions
-- [ ] Add it to a project
+- [x] Write install instructions
+- [x] Add it to a project
 - [ ] Release v0.9
 - [ ] Add the changes from asana
 - [ ] Release v1

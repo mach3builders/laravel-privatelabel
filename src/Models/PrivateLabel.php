@@ -5,6 +5,7 @@ namespace Mach3builders\PrivateLabel\Models;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Mach3builders\PrivateLabel\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -12,6 +13,7 @@ class PrivateLabel extends Model implements HasMedia
 {
     use HasFactory;
     use InteractsWithMedia;
+    use HasStatus;
 
     protected $fillable = [
         'forge_site_id',

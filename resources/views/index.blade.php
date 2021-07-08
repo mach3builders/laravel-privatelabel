@@ -18,7 +18,7 @@
 
             @if ($private_label->exists())
                 <span class="private-label-poller"
-                        data-poll-url="{{ route('private-label.check-status') }}"
+                        data-poll-url="{{ route('private-label.check-status', $private_label->owner) }}"
                         data-poll-status="{{ $private_label->completedStatus('site_installed') ? 'done' : 'running'  }}"
                         data-poll-timer="5000">
                 </span>
@@ -110,7 +110,7 @@
                                 <input type="file" name="logo_light" id="logo_light" class="custom-file-input {{ $errors->has('logo_light') ? 'is-invalid' : '' }}">
 
                                 <label class="custom-file-label">
-                                    {{ __('privatelabel::common.choose_file') }}
+                                    {{ __('privatelabel::private-label.choose_file') }}
                                 </label>
 
                                 @error('logo_light')
@@ -154,7 +154,7 @@
                                 <input type="file" name="logo_dark" id="logo_dark" class="custom-file-input {{ $errors->has('logo_dark') ? 'is-invalid' : '' }}">
 
                                 <label class="custom-file-label">
-                                    {{ __('privatelabel::common.choose_file') }}
+                                    {{ __('privatelabel::private-label.choose_file') }}
                                 </label>
 
                                 @error('logo_dark')
@@ -198,7 +198,7 @@
                                 <input type="file" name="favicon" id="favicon" class="custom-file-input {{ $errors->has('favicon') ? 'is-invalid' : '' }}">
 
                                 <label class="custom-file-label">
-                                    {{ __('privatelabel::common.choose_file') }}
+                                    {{ __('privatelabel::private-label.choose_file') }}
                                 </label>
 
                                 @error('favicon')
@@ -213,7 +213,7 @@
             </div>
 
             <div class="ui-btns">
-                <button type="submit" class="btn btn-success">{{ __('privatelabel::common.save') }}</button>
+                <button type="submit" class="btn btn-success">{{ __('privatelabel::private-label.save') }}</button>
             </div>
         </form>
     </div>
