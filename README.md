@@ -133,7 +133,7 @@ $('.private-label-poller').poller({
 When given the ability to make a private label you do want to show the required logo / mail etc
 to make it easy copy the following code to your `Brand.php`
 
-```
+```php
 <?php
 
 namespace App;
