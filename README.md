@@ -109,6 +109,11 @@ composer test
 - [x] Make sure all test runs
 - [x] Write install instructions
 - [x] Add it to a project
+- [ ] Setup github actions
+- [ ] Test package on php 7.3
+- [ ] Test package on php 7.4
+- [ ] Test package on php 8.0
+- [ ] Publish package after all tests have ran
 - [ ] Release v0.9
 - [ ] Add the changes from asana
 - [ ] Release v1
