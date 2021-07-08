@@ -101,6 +101,8 @@ use HasPrivateLabel;
 Add the following snippet inside your app.js
 
 ```js
+import '@mach3builders/ui/dist/js/plugins/poller'
+
 $('.private-label-poller').poller({
     running: function(target, data) {
         switch(data.current_status) {
