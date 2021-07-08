@@ -114,6 +114,8 @@ composer test
 - [ ] Test package on php 7.4
 - [ ] Test package on php 8.0
 - [ ] Publish package after all tests have ran
+- [ ] Add cname capabilities
+- [ ] fix poller
 - [ ] Release v0.9
 - [ ] Add the changes from asana
 - [ ] Release v1

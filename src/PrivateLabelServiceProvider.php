@@ -2,6 +2,7 @@
 
 namespace Mach3builders\PrivateLabel;
 
+use Laravel\Forge\Forge;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -16,5 +17,9 @@ class PrivateLabelServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasMigration('create_privatelabel_table')
             ->hasTranslations();
+
+        $this->app->bind(Forge::class, function () {
+            return new Forge(config('private-label.forge.api_token'));
+        });
     }
 }
