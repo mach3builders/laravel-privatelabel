@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.3||^8.0",
         "illuminate/contracts": "^8.37",
         "laravel/forge-sdk": "^3.7",
         "spatie/laravel-medialibrary": "^9.6",
