@@ -77,6 +77,7 @@ php artisan migrate
 
 ## Usage
 
+### Nav 
 Place the index route in the menu
 ```html
     <li class="nav-item">
@@ -89,11 +90,100 @@ Place the index route in the menu
     </li>
 ```
 
+### Php
 Add the following trait to the owner model of the config
 ```php
 use Mach3builders\PrivateLabel\Traits\HasPrivateLabel;
 
 use HasPrivateLabel;
+```
+### Js
+Add the following snippet inside your app.js
+
+```js
+$('.private-label-poller').poller({
+    running: function(target, data) {
+        switch(data.current_status) {
+            case 'dns_validating':
+                $('#dns_validating').removeClass('d-none')
+                $('#dns_validated').addClass('d-none')
+            break;
+
+            case 'dns_validated':
+                $('#dns_validating').addClass('d-none')
+                $('#dns_validated').removeClass('d-none')
+            break;
+
+            case 'site_installing':
+                $('#site_installing').removeClass('d-none')
+                $('#site_installed').addClass('d-none')
+            break;
+        }
+    },
+    done: function (target, data) {
+        $('#site_installing').addClass('d-none')
+        $('#site_installed').removeClass('d-none')
+    }
+})
+```
+
+### Using the label trough the app
+When given the ability to make a private label you do want to show the required logo / mail etc
+to make it easy copy the following code to your `Brand.php`
+
+```
+<?php
+
+namespace App;
+
+class Brand
+{
+    public static function name()
+    {
+        return label()->name
+            ?? config('app.name', 'Mach3Builders');
+    }
+
+    public static function logoLight()
+    {
+        return optional(label())->hasMedia('logo_light')
+            ? label()->getFirstMediaUrl('logo_light')
+            : config('brand.logo_light');
+    }
+
+    public static function logoDark()
+    {
+        return optional(label())->hasMedia('logo_dark')
+            ? label()->getFirstMediaUrl('logo_dark')
+            : config('brand.logo_dark');
+    }
+
+    public static function logoLoginHeight()
+    {
+        return optional(label())->hasMedia('logo_dark')
+            ? label()->logo_login_height
+            : config('brand.logo_login_height');
+    }
+
+    public static function logoAppHeight()
+    {
+        return optional(label())->hasMedia('logo_light')
+            ? label()->logo_app_height
+            : config('brand.logo_app_height');
+    }
+
+    public static function favicon()
+    {
+        return optional(label())->hasMedia('favicon')
+            ? label()->getFirstMediaUrl('favicon')
+            : config('brand.favicon');
+    }
+
+    public static function registration()
+    {
+        return config('brand.registration');
+    }
+}
 ```
 
 ## Testing
@@ -115,7 +205,7 @@ composer test
 - [ ] Test package on php 8.0
 - [ ] Publish package after all tests have ran
 - [ ] Add cname capabilities
-- [ ] fix poller
+- [x] fix poller
 - [ ] Release v0.9
 - [ ] Add the changes from asana
 - [ ] Release v1

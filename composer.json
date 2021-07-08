@@ -31,7 +31,10 @@
         "psr-4": {
             "Mach3builders\\PrivateLabel\\": "src",
             "Mach3builders\\PrivateLabel\\Database\\Factories\\": "database/factories"
-        }
+        },
+        "files": [
+            "src/Support/Helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
