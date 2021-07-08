@@ -100,7 +100,7 @@
                                         <img src="{{ $private_label->getFirstMediaUrl('logo_light') }}" class="align-self-center img-fluid w-max-content">
                                     </div>
 
-                                    <a href="{{ route('private-label.delete-media', [$owner, $private_label->getFirstMedia('logo_light')]) }}" class="align-self-start btn btn-sm ui-btn-icon text-white border-white">
+                                    <a href="{{ route('private-label.delete-media', ['owner_id' => $owner, 'media' => $private_label->getFirstMedia('logo_light')]) }}" class="align-self-start btn btn-sm ui-btn-icon text-white border-white">
                                         <i class="far fa-trash"></i>
                                     </a>
                                 </div>
@@ -144,7 +144,7 @@
                                         <img src="{{ $private_label->getFirstMediaUrl('logo_dark') }}" class="align-self-center img-fluid w-max-content">
                                     </div>
 
-                                    <a href="{{ route('private-label.delete-media', [$owner, $private_label->getFirstMedia('logo_dark')]) }}" class="align-self-start btn btn-sm ui-btn-icon btn-outline-light">
+                                    <a href="{{ route('private-label.delete-media', ['owner_id' => $owner, 'media' => $private_label->getFirstMedia('logo_dark')]) }}" class="align-self-start btn btn-sm ui-btn-icon btn-outline-light">
                                         <i class="far fa-trash"></i>
                                     </a>
                                 </div>
@@ -188,7 +188,7 @@
                                         <img src="{{ $private_label->getFirstMediaUrl('favicon') }}" class="align-self-center img-fluid w-max-content">
                                     </div>
 
-                                    <a href="{{ route('private-label.delete-media', [$owner, $private_label->getFirstMedia('favicon')]) }}" class="align-self-start btn btn-sm ui-btn-icon btn-outline-light">
+                                    <a href="{{ route('private-label.delete-media', ['owner_id' => $owner, 'media' => $private_label->getFirstMedia('favicon')]) }}" class="align-self-start btn btn-sm ui-btn-icon btn-outline-light">
                                         <i class="far fa-trash"></i>
                                     </a>
                                 </div>
