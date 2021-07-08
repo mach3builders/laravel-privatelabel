@@ -89,7 +89,7 @@ Place the index route in the menu
     </li>
 ```
 
-Add the the followin trait to the owner model of the config
+Add the following trait to the owner model of the config
 ```php
 use Mach3builders\PrivateLabel\Traits\HasPrivateLabel;
 
