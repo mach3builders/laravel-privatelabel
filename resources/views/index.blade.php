@@ -17,17 +17,19 @@
             <h2 class="ui-heading mt-4">{{ __('privatelabel::private-label.domain') }}</h2>
 
             @if ($private_label->exists())
-                <span class="private-label-poller"
-                        data-poll-url="{{ route('private-label.check-status', $private_label->owner) }}"
-                        data-poll-status="{{ $private_label->completedStatus('site_installed') ? 'done' : 'running'  }}"
-                        data-poll-timer="5000">
-                </span>
+                @if (! $private_label->completedStatus('site_installed'))
+                    <span class="private-label-poller"
+                            data-poll-url="{{ route('private-label.check-status', $private_label->owner) }}"
+                            data-poll-status="{{ $private_label->completedStatus('site_installed') ? 'done' : 'running'  }}"
+                            data-poll-timer="5000">
+                    </span>
+                @endif
 
                 <ul id="private-label" class="list-group mt-3 mb-0">
                     <li class="list-group-item">
                         <div class="ui-icon-text">
-                            <i class="far fa-spinner fa-spin {{ $private_label->completedStatus('dns_validating') ? 'd-none' : '' }}" id="dns_validating"></i>
-                            <i class="far fa-check text-success {{ $private_label->completedStatus('dns_validated') ? '' : 'd-none' }}" id="dns_validated"></i>
+                            <i class="far fa-spinner fa-spin {{ !$private_label->completedStatus('dns_validated') ?: 'd-none' }}" id="dns_validating"></i>
+                            <i class="far fa-check text-success {{ $private_label->completedStatus('dns_validated') ?: 'd-none' }}" id="dns_validated"></i>
 
                             <div>
                                 {{ __('privatelabel::private-label.checking_dns') }}
@@ -38,8 +40,8 @@
 
                     <li class="list-group-item">
                         <div class="ui-icon-text">
-                            <i class="far fa-spinner fa-spin {{ $private_label->completedStatus('site_installing') ? 'd-none' : '' }}" id="site_installing"></i>
-                            <i class="far fa-check text-success {{ $private_label->completedStatus('site_installed') ? '' : 'd-none' }}" id="site_installed"></i>
+                            <i class="far fa-spinner fa-spin {{ !$private_label->completedStatus('site_installed') ?: 'd-none' }}" id="site_installing"></i>
+                            <i class="far fa-check text-success {{ $private_label->completedStatus('site_installed') ?: 'd-none' }}" id="site_installed"></i>
 
                             <div>
                                 {{ __('privatelabel::private-label.activating_ssl') }}
