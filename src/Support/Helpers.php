@@ -9,4 +9,3 @@ if (! function_exists('label')) {
         return \Mach3builders\PrivateLabel\Models\PrivateLabel::where('domain', request()->server('HTTP_HOST'))->first();
     }
 }
-
