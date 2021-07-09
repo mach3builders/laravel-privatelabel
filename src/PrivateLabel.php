@@ -4,7 +4,7 @@ namespace Mach3builders\PrivateLabel;
 
 class PrivateLabel
 {
-    public function findOwnerById($owner_id)
+    public function findOwnerById(int $owner_id)
     {
         if ($owner_id === null) {
             return;

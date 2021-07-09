@@ -1,6 +1,6 @@
 # Add private label functionality to mach3laravel applications
 
-This is a package made for the laravel start of mach3builders, the package assumes the laravel-starter template has been used to create the project.
+This is a package made for the laravel-starter, the package assumes the laravel-starter template has been used to create the project.
 
 ## Installation
 
@@ -188,6 +188,46 @@ class Brand
 }
 ```
 
+### Label api
+The package adds an `label()` helper
+below are all the methods / properties you can access trough this helper
+
+#### Properties
+```php
+public string $domain;
+public string $name;
+public string $email;
+public string $logo_login_height; // should be used together with the logo_login
+public string $logo_app_height; // should be used together with the logo_app
+public string $status; // has one of the following statusses
+
+protected $statusses = [
+    'dns_validating',
+    'dns_validated',
+    'site_installing',
+    'site_installed',
+];
+```
+
+#### Methods
+The following method returns the owner of the private label.
+This corresponds with the owner model set in the config
+```php
+public function owner()
+```
+
+Since laravel-privatelabel uses spatie/medialibary all the methods are available.
+The following collections are defined inside the `PrivateLabel` model
+
+```php
+public function registerMediaCollections(): void
+{
+    $this->addMediaCollection('logo_light')->singleFile();
+    $this->addMediaCollection('logo_dark')->singleFile();
+    $this->addMediaCollection('favicon')->singleFile();
+}
+```
+
 ## Testing
 
 ```bash
@@ -208,6 +248,7 @@ composer test
 - [ ] Publish package after all tests have ran
 - [ ] Add cname capabilities
 - [x] fix poller
+- [x] Write api docs
 - [ ] Release v0.9
 - [ ] Add the changes from asana
 - [ ] Release v1
