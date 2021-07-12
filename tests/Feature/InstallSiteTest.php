@@ -9,7 +9,7 @@ use Mach3builders\PrivateLabel\Tests\BaseTestCase;
 use Mach3builders\PrivateLabel\Models\PrivateLabel;
 use Mach3builders\PrivateLabel\Tests\Fixtures\Owner;
 
-class PrivateLabelTest extends BaseTestCase
+class InstallSiteTest extends BaseTestCase
 {
     /** @test */
     public function will_start_installing_site()
