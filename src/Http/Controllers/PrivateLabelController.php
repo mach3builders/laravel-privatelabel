@@ -51,10 +51,10 @@ class PrivateLabelController extends Controller
 
     public function deleteMedia(int $owner_id, int $media)
     {
-        $owner = PrivateLabelFacade::findOwnerById($owner_id);
+        $private_label = PrivateLabelFacade::findByOwnerId($owner_id);
         $media = Media::findOrFail($media);
 
-        abort_unless($media->model->owner->is($owner), 403);
+        abort_unless($media->model->is($private_label), 403);
 
         $media->delete();
 
@@ -63,10 +63,8 @@ class PrivateLabelController extends Controller
 
     public function poll(int $owner_id)
     {
-        $owner = PrivateLabelFacade::findOwnerById($owner_id);
-
-        $private_label = $owner->privatelabel;
-        $status_of_polling = $private_label->completedStatus('site_installed')
+        $private_label = PrivateLabelFacade::findByOwnerId($owner_id);
+        $status_of_polling = $private_label?->completedStatus('site_installed')
                                 ? 'done'
                                 : 'running';
 
