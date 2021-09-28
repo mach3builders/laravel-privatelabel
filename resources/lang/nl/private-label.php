@@ -6,7 +6,7 @@ return [
     'checking_dns' => 'Controleren DNS',
     'choose_file' => 'Kies bestand',
     'domain_form_text' => 'Vul hier de domeinnaam in voor jouw Private Label omgeving. Deze domeinnaam moet in jouw bezit zijn. Vul de volledige naam in met "www". Het mag ook een subdomein (subdomein.jouwdomeinnaam.nl) zijn van jouw website.',
-    'domain' => 'Domain',
+    'domain' => 'Domein',
     'email_form_text' => 'Vul hier het e-mailadres in dat als afzender adres wordt getoond aan jouw klanten bij alle mailtjes, welke verzonden worden vanuit jouw Private Label omgeving.',
     'email' => 'E-mailadres',
     'favicon_form_text' => 'Upload hier het icoon dat getoond wordt in het browservenster tabblad.',
