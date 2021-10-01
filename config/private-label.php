@@ -14,7 +14,7 @@ return [
     /**
      * Middleware the private label route should live under
      */
-    'middleware' => ['web', 'auth'],
+    'middleware' => ['web', 'auth', 'locale'],
 
     /**
      * The prefix used inside the route group
