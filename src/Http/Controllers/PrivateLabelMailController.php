@@ -17,8 +17,7 @@ class PrivateLabelMailController extends Controller
     public function index(int $owner_id)
     {
         $owner = PrivateLabelFacade::findOwnerById($owner_id);
-
-        $private_label = $owner->privateLabel()->firstOrNew();
+        $private_label = PrivateLabelFacade::findByOwnerId($owner_id);
 
         return view('privatelabel::mail', compact('private_label', 'owner'));
     }
@@ -29,7 +28,7 @@ class PrivateLabelMailController extends Controller
             'email' => 'required|email:rfc'
         ]);
 
-        $label = PrivateLabelFacade::findOwnerById($owner_id)->privateLabel()->first();
+        $label = PrivateLabelFacade::findByOwnerId($owner_id);
 
         $label->update([
             'email' => $attributes['email'],
@@ -43,8 +42,8 @@ class PrivateLabelMailController extends Controller
 
     public function verify(int $owner_id)
     {
-        $label = PrivateLabelFacade::findOwnerById($owner_id)->privateLabel()->first();
-
+        $label = PrivateLabelFacade::findByOwnerId($owner_id);
+        
         $response = Http::withBasicAuth('api', config('private-label.mailgun.api_token'))
             ->put('https://api.eu.mailgun.net/domains/<domain>/verify');
 

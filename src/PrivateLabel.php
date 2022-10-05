@@ -29,4 +29,13 @@ class PrivateLabel
 
         return (new $model)->where('id', $owner_id)->first();
     }
+
+    public function findByOwnerId(int $owner_id)
+    {
+        if ($owner_id === null) {
+            return;
+        }
+
+        return Model::where('owner_id', $owner_id)->first();
+    }
 }
