@@ -22,6 +22,7 @@ class PrivateLabel extends Model implements HasMedia
         'email',
         'logo_login_height',
         'logo_app_height',
+        'email_verified',
         'status',
     ];
 
@@ -47,6 +48,15 @@ class PrivateLabel extends Model implements HasMedia
             ->where('type', 'CNAME')
             ->where('target', config('private-label.domain'))
             ->count();
+    }
+
+    public function setEmailVerified()
+    {
+        $this->update([
+            'email_verified' => true
+        ]);
+
+        \Mach3builders\PrivateLabel\Events\EmailDomainVerified::dispatch($this);
     }
 
     public function registerMediaCollections(): void

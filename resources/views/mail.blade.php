@@ -7,10 +7,6 @@
 
 @section('body')
     <div class="ui-section-view-main-body">
-        <div class="alert alert-primary">
-            {!! __('privatelabel::private-label.info') !!}
-        </div>
-        
         @include('privatelabel::tabs')
 
         <form action="{{ route('private-label.update', $owner) }}" method="post" enctype="multipart/form-data">

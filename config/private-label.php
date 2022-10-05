@@ -34,4 +34,11 @@ return [
         'server_id' => env('FORGE_SERVER_ID'),
         'server_ip' => env('FORGE_SERVER_IP'),
     ],
+
+    /**
+     * Forge information
+     */
+    'mailgun' => [
+        'api_token' => env('MAILGUN_API_TOKEN', ''),
+    ],
 ];
