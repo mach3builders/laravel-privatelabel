@@ -24,8 +24,6 @@ class InstallDomain implements ShouldQueue
 
     public function handle()
     {
-        // curl -s --user 'api:key-56cdbc52f40f8b7b94d022f49710eb36' -X DELETE \
-        //         https://api.mailgun.net/v3/domains/watkanschaapwel.nl
         Http::asForm()->withBasicAuth('api', config('private-label.mailgun.api_token'))
             ->post('https://api.eu.mailgun.net/v3/domains', [
                 'name' => $this->private_label->email_domain,
