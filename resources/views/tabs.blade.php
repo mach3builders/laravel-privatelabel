@@ -5,7 +5,7 @@
                 'ui-tabs-item',
                 'active' => Route::is('private-label.index'),
             ])>
-                <a href="{{ route('private-label.index', $owner) }}" class="ui-tabs-link">{{ __('privatelabel::general') }}</a>
+                <a href="{{ route('private-label.index', $owner) }}" class="ui-tabs-link">{{ __('privatelabel::private-label.general') }}</a>
             </li>
 
             @if ($private_label->exists())
@@ -13,7 +13,7 @@
                     'ui-tabs-item',
                     'active' => Route::is('private-label.mail.index'),
                 ])>
-                    <a href="{{ route('private-label.mail.index', $owner) }}" class="ui-tabs-link">{{ __('privatelabel::mail') }}</a>
+                    <a href="{{ route('private-label.mail.index', $owner) }}" class="ui-tabs-link">{{ __('privatelabel::private-label.mail') }}</a>
                 </li>
             @endif
         </ul>

@@ -11,23 +11,28 @@ return [
     'email' => 'E-mailadres',
     'favicon_form_text' => 'Upload hier het icoon dat getoond wordt in het browservenster tabblad.',
     'favicon' => 'Favicon',
+    'general' => 'Algemeen',
     'images' => 'Afbeeldingen',
-    'verify' => 'Verifieer domein',
-    'info_email' => 'Voeg de volgende DNS records toe aan uw domein:',
-    'info' => '<strong>Let op!</strong><br>
-        Wij raden aan om eerst het CNAME-record aan te maken in de DNS van jouw domeinnaam.<br>
-        Maak een CNAME-record aan voor het gekozen (sub)domein met als waarde: <strong>'.config('private-label.domain').'</strong>.<br>
-        Dan zal jouw Private Label omgeving sneller actief zijn.<br>
-        Heb je hulp nodig bij het instellen van het CNAME-record, neem dan contact op met je domeinnaamleverancier.',
+    'info_email_verified' => 'Domein is geverifieerd',
+    'info_email' => 'Voeg de volgende DNS records toe aan uw domein: ',
     'logo_app_height' => 'Height logo navbar',
     'logo_dark_form_text' => 'Upload hier het logo dat getoond wordt op de witte schermen van '.config('app.name').'.',
     'logo_dark' => 'Donker logo',
     'logo_light_form_text' => 'Upload hier het logo dat getoond wordt op de donkere schermen van '.config('app.name'),
     'logo_light' => 'Licht logo',
     'logo_login_height' => 'Height logo login screen',
+    'mail' => 'Email instellingen',
     'name_form_text' => 'Vul hier de domeinnaam in voor jouw Private Label omgeving. Deze domeinnaam moet in jouw bezit zijn. Vul de volledige naam in met "www". Het mag ook een subdomein (subdomein.jouwdomeinnaam.nl) zijn van jouw website.',
     'name' => 'Naam',
     'private-label' => 'Private label',
     'save' => 'Opslaan',
+    'value' => 'Waarde',
+    'verify' => 'Verifieer domein',
     'your_platform' => 'Jouw platform',
+
+    'info' => '<strong>Let op!</strong><br>
+        Wij raden aan om eerst het CNAME-record aan te maken in de DNS van jouw domeinnaam.<br>
+        Maak een CNAME-record aan voor het gekozen (sub)domein met als waarde: <strong>'.config('private-label.domain').'</strong>.<br>
+        Dan zal jouw Private Label omgeving sneller actief zijn.<br>
+        Heb je hulp nodig bij het instellen van het CNAME-record, neem dan contact op met je domeinnaamleverancier.',
 ];

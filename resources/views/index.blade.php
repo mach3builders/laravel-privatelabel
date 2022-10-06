@@ -17,8 +17,6 @@
             @method('PATCH')
             @csrf
 
-            <h2 class="ui-heading mt-4">{{ __('privatelabel::private-label.domain') }}</h2>
-
             @if ($private_label->exists())
                 @if (! $private_label->completedStatus('site_installed'))
                     <span class="private-label-poller"
