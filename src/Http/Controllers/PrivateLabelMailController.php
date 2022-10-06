@@ -43,15 +43,21 @@ class PrivateLabelMailController extends Controller
     public function verify(int $owner_id)
     {
         $label = PrivateLabelFacade::findByOwnerId($owner_id);
-        
-        $response = Http::withBasicAuth('api', config('private-label.mailgun.api_token'))
-            ->put('https://api.eu.mailgun.net/domains/<domain>/verify');
+        $dns_records = collect();
 
-        // todo
-        if ($response->ok()) {
-            $label->setEmailVerified();
+        $response = Http::withBasicAuth('api', config('private-label.mailgun.api_token'))
+            ->put('https://api.eu.mailgun.net/v3/domains/'.$label->email_domain.'/verify');
+        if ($response->status() == 200) {
+            if ($response->json('domain.state') == 'verified') {
+                $label->setEmailVerified();
+            } else {
+                $dns_records->push(...$response->json('receiving_dns_records', []));
+                $dns_records->push(...$response->json('sending_dns_records', []));
+            }
         }
 
-        return back();
+        return back()->with([
+            'dns_records' => $dns_records
+        ]);
     }
 }

@@ -38,6 +38,15 @@ class PrivateLabel extends Model implements HasMedia
         return $this->belongsTo(config('private-label.owner_model'), 'owner_id', 'id');
     }
 
+    public function getEmailDomainAttribute()
+    {
+        if (! $this->email) {
+            return null;
+        }
+        
+        return substr(strrchr($this->email, "@"), 1);
+    }
+
     public function checkDns(): bool
     {
         if ($this->status != 'dns_validating') {

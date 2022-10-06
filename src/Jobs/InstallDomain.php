@@ -24,15 +24,12 @@ class InstallDomain implements ShouldQueue
 
     public function handle()
     {
-        $domain_name = substr(strrchr($this->private_label->email, "@"), 1);
-
-     
-        $response = Http::asForm()->withBasicAuth('api', config('private-label.mailgun.api_token'))
+        // curl -s --user 'api:key-56cdbc52f40f8b7b94d022f49710eb36' -X DELETE \
+        //         https://api.mailgun.net/v3/domains/watkanschaapwel.nl
+        Http::asForm()->withBasicAuth('api', config('private-label.mailgun.api_token'))
             ->post('https://api.eu.mailgun.net/v3/domains', [
-                'name' => $domain_name,
+                'name' => $this->private_label->email_domain,
                 'smtp_password' => Str::random(30),
             ]);
-
-        dd($response->json(), $response->status());
     }
 }

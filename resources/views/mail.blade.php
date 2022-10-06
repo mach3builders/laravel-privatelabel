@@ -2,6 +2,30 @@
 
 @section('body')
     <div class="ui-section-view-main-body">
+        @if (session()->has('dns_records'))
+            <div class="alert alert-primary">
+                Please add the following dns records to <strong>{{ $private_label->email_domain }}</strong>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <th>Type</th>
+                    <th>Naam</th>
+                    <th>Waarde</th>
+                </thead>
+                <tbody>
+
+                    @foreach (session()->pull('dns_records') as $record)
+                        <tr >
+                            <td>Type: {{ $record['record_type'] }}</td>
+                            <td>{{ $record['name'] ?? '-' }}</td>
+                            <td style="overflow-wrap: anywhere;">{{ $record['value'] }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+
         @include('privatelabel::tabs')
 
         <form action="{{ route('private-label.mail.update', $owner) }}" method="post" id="form-email">
@@ -29,10 +53,12 @@
         </form>
 
         <div class="d-flex justify-content-end mt-3">
-            <form action="{{ route('private-label.mail.verify', $owner) }}" method="post">
-                @csrf
-                <button type="submit" class="btn btn-primary mr-3">{{ __('privatelabel::private-label.verify') }}</button>
-            </form>
+            @if ($private_label->email_domain && ! $private_label->email_is_verified)
+                <form action="{{ route('private-label.mail.verify', $owner) }}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-primary mr-3">{{ __('privatelabel::private-label.verify') }}</button>
+                </form>
+            @endif
 
             <button form="form-email" type="submit" class="btn btn-success">{{ __('privatelabel::private-label.save') }}</button>
         </div>
