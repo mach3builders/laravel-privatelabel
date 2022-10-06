@@ -4,7 +4,6 @@
     <div class="ui-heading">{{ __('privatelabel::private-label.private-label') }}</div>
 @endsection
 
-
 @section('body')
     <div class="ui-section-view-main-body">
         <div class="alert alert-primary">

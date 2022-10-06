@@ -58,7 +58,15 @@ return [
         'server_id' => env('FORGE_SERVER_ID'),
         'server_ip' => env('FORGE_SERVER_IP'),
     ],
+
+    /**
+     * Forge information
+     */
+    'mailgun' => [
+        'api_token' => env('MAILGUN_API_TOKEN', ''),
+    ],
 ];
+
 ```
 
 Add the following .env vars to your .env
@@ -67,6 +75,7 @@ PRIVATE_LABEL_DOMAIN=
 FORGE_SERVER_ID=
 FORGE_API_TOKEN=
 FORGE_SERVER_IP=
+MAILGUN_API_TOKEN=
 ```
 
 Migrate the database
@@ -206,6 +215,19 @@ protected $statusses = [
     'dns_validated',
     'site_installing',
     'site_installed',
+];
+```
+### Events
+The email page gives the user the possibility to add a email to their private label. The domain of that email then gets added to the mailgun account of m3b.
+The user then has the ability to verify that this domain has been added and is verified.
+
+After the domain has been verified the event EVENT gets triggered. So if your application would like to do something based on that you can adde the follow code to your `EventServiceProvider`
+```PHP
+protected $listen = [
+    // ...
+    \Mach3builders\PrivateLabel\Events\EmailDomainVerified::class => [
+        \App\Listeners\Listener::class,
+    ],
 ];
 ```
 
