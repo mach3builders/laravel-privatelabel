@@ -19,7 +19,6 @@ class UpdatePrivateLabelRequest extends FormRequest
     {
         $rules = [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
             'logo_login_height' => 'nullable|numeric|max:100',
             'logo_app_height' => 'nullable|numeric|max:100',
         ];

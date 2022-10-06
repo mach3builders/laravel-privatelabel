@@ -10,7 +10,7 @@
         <div class="alert alert-primary">
             {!! __('privatelabel::private-label.info') !!}
         </div>
-        
+
         @include('privatelabel::tabs')
 
         <form action="{{ route('private-label.update', $owner) }}" method="post" enctype="multipart/form-data">
@@ -75,17 +75,6 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                             <small class="form-text text-muted">{{ __('privatelabel::private-label.name_form_text') }}</small>
-                        </div>
-                    </div>
-
-                    <div class="form-group row ui-required">
-                        <label for="email" class="col-md-4 col-form-label">{{ __('privatelabel::private-label.email') }}</label>
-                        <div class="col-md-8">
-                            <input type="text" name="email" value="{{ old('email', $private_label->email) }}" id="email" class="form-control @error('email') is-invalid @enderror">
-                            @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            <small class="form-text text-muted">{{ __('privatelabel::private-label.email_form_text') }}</small>
                         </div>
                     </div>
                 </div>
