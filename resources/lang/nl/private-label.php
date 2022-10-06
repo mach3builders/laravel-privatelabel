@@ -12,6 +12,8 @@ return [
     'favicon_form_text' => 'Upload hier het icoon dat getoond wordt in het browservenster tabblad.',
     'favicon' => 'Favicon',
     'images' => 'Afbeeldingen',
+    'verify' => 'Verifieer domein',
+    'info_email' => 'Voeg de volgende DNS records toe aan uw domein:',
     'info' => '<strong>Let op!</strong><br>
         Wij raden aan om eerst het CNAME-record aan te maken in de DNS van jouw domeinnaam.<br>
         Maak een CNAME-record aan voor het gekozen (sub)domein met als waarde: <strong>'.config('private-label.domain').'</strong>.<br>
