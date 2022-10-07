@@ -12,11 +12,7 @@ return [
     'favicon_form_text' => 'Upload here the icon shown in the browser window tab.',
     'favicon' => 'favicon',
     'images' => 'images',
-    'info' => '<strong>Caution!</strong><br>
-        We recommend that you first create the CNAME record in the DNS of your domain name.<br>
-        Create a CNAME record for the chosen (sub)domain with the value: <strong>'.config('private-label.domain').'</strong>.<br>
-        Then your Private Label environment will be active faster.<br>
-        If you need help setting up the CNAME record, please contact your domain name provider.',
+    'info_email' => 'Please add the following dns records to:',
     'logo_app_height' => 'Height logo navbar',
     'logo_dark_form_text' => 'Upload here the logo shown on the login page of the tool. We recommend using a PNG with transparent background.',
     'logo_dark' => 'Dark logo',
@@ -25,7 +21,20 @@ return [
     'logo_login_height' => 'Height logo login screen',
     'name_form_text' => 'Enter here the name that will be shown as sender to your customers with all system mails, which are sent from your Private Label environment.',
     'name' => 'Name',
+    'logo_login_height' => 'Hoogte logo op loginscherm',
+    'mail' => 'Email settings',
+    'name_form_text' => 'Enter the domain name for your Private Label environment here. This domain name must be in your possession. Enter the full name with "www". It may also be a subdomain (subdomain.yourdomainname.nl) of your website. ',
+    'name' => 'Name',
+    'info_email_verified' => 'Domein is verified',
+    'value' => 'Value',
+    'private-label' => 'Private label',
     'private label' => 'Private label',
     'save' => 'Save',
+    'verify' => 'Verify domain',
     'your_platform' => 'Your platform',
+    'info' => '<strong> Attention! </strong> <br>
+        We recommend that you first create the CNAME record in the DNS of your domain name. <br>
+        Create a CNAME record for the chosen (sub) domain with the value: <strong>'.config('private-label.domain').'</strong>. <br>
+        Then your Private Label environment will be active faster. <br>
+        If you need help setting the CNAME record, please contact your domain name provider.',
 ];
