@@ -9,7 +9,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Mach3builders\PrivateLabel\Services\Forge;
 use Mach3builders\PrivateLabel\Models\PrivateLabel;
 
 class InstallDomain implements ShouldQueue
@@ -19,8 +18,10 @@ class InstallDomain implements ShouldQueue
     public $timeout = 600;
 
     public function __construct(
-        public PrivateLabel $private_label)
-    { }
+        public PrivateLabel $private_label
+    )
+    {
+    }
 
     public function handle()
     {

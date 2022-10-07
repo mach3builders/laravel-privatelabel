@@ -5,7 +5,7 @@ use Mach3builders\PrivateLabel\Http\Controllers\PrivateLabelController;
 use Mach3builders\PrivateLabel\Http\Controllers\PrivateLabelMailController;
 
 // Private label
-Route::prefix(config('private-label.route_prefix'))->middleware(config('private-label.middleware'))->group(function(){
+Route::prefix(config('private-label.route_prefix'))->middleware(config('private-label.middleware'))->group(function () {
     Route::get('private-label/{owner_id}', [PrivateLabelController::class, 'index'])->name('private-label.index');
     Route::patch('private-label/{owner_id}', [PrivateLabelController::class, 'update'])->name('private-label.update');
     Route::get('private-label/{owner_id}/poll', [PrivateLabelController::class, 'poll'])->name('private-label.check-status');

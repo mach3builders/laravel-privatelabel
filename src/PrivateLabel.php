@@ -2,7 +2,6 @@
 
 namespace Mach3builders\PrivateLabel;
 
-use Illuminate\Support\Facades\Cache;
 use Mach3builders\PrivateLabel\Models\PrivateLabel as Model;
 
 class PrivateLabel

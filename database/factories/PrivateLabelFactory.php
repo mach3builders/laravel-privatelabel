@@ -9,7 +9,7 @@ class PrivateLabelFactory extends Factory
 {
     protected $model = PrivateLabel::class;
 
-    public function definition(): Array
+    public function definition(): array
     {
         return [
             'domain' => $this->faker->domainName,
