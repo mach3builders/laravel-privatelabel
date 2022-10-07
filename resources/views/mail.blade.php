@@ -28,10 +28,10 @@
                 </thead>
                 <tbody>
                     @foreach (session()->pull('dns_records') as $record)
-                        <tr >
-                            <td>Type: {{ $record['record_type'] }}</td>
-                            <td>{{ $record['name'] ?? '-' }}</td>
-                            <td>{{ $record['priority'] ?? '-' }}</td>
+                        <tr>
+                            <td>{{ $record['record_type'] }}</td>
+                            <td>{{ $record['name'] ?? '' }}</td>
+                            <td>{{ $record['priority'] ?? '' }}</td>
                             <td style="overflow-wrap: anywhere;">{{ $record['value'] }}</td>
                         </tr>
                     @endforeach

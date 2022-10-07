@@ -12,6 +12,7 @@ class PrivateLabelMailController extends Controller
 {
     public function index(int $owner_id)
     {
+
         $owner = PrivateLabelFacade::findOwnerById($owner_id);
         $private_label = PrivateLabelFacade::findByOwnerId($owner_id);
 
@@ -58,6 +59,6 @@ class PrivateLabelMailController extends Controller
             }
         }
 
-        return back()->with($data);
+        return redirect()->route('private-label.mail.index', $owner_id)->with($data);
     }
 }
