@@ -5,6 +5,7 @@ return [
     'checking_dns_info' => 'Make sure the CNAME record for :domain points to '.config('private-label.domain').' Note: It can take up to 24 hours before a changed DNS setting is visible.',
     'checking_dns' => 'Checking DNS',
     'choose_file' => 'Choose file',
+    'priority' => 'Priority',
     'domain_form_text' => 'Enter here the domain name for your Private Label environment. This domain name must be in your possession. Enter the full name with "www". It can also be a subdomain (subdomain.yourdomain.nl) of your website.',
     'domain' => 'Domain',
     'email_form_text' => 'Enter here the e-mail address that will be shown as the sender address to your customers for system mails, which are sent from your Private Label environment.',

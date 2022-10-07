@@ -33,27 +33,31 @@ class PrivateLabelMailController extends Controller
 
         InstallDomain::dispatch($label);
 
+        session()->flash('notify.message', __('privatelabel::private-label.saved_and_installing_email'));
+        session()->flash('notify.type', 'success');
+
         return back();
     }
 
     public function verify(int $owner_id)
     {
         $label = PrivateLabelFacade::findByOwnerId($owner_id);
-        $dns_records = collect();
+        $data = [];
 
         $response = Http::withBasicAuth('api', config('private-label.mailgun.api_token'))
             ->put('https://api.eu.mailgun.net/v3/domains/'.$label->email_domain.'/verify');
+
         if ($response->status() == 200) {
-            if ($response->json('domain.state') == 'verified') {
+            if ($response->json('domain.state') == 'active') {
                 $label->setEmailVerified();
             } else {
+                $dns_records = collect();
                 $dns_records->push(...$response->json('receiving_dns_records', []));
                 $dns_records->push(...$response->json('sending_dns_records', []));
+                $data['dns_records'] = $dns_records;
             }
         }
 
-        return back()->with([
-            'dns_records' => $dns_records
-        ]);
+        return back()->with($data);
     }
 }
