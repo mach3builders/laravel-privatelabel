@@ -1,14 +1,13 @@
 <?php
 
 $finder = Symfony\Component\Finder\Finder::create()
-    ->in([
-        __DIR__ . '/src',
-        __DIR__ . '/tests',
-    ])
+    ->notPath('vendor')
+    ->in(__DIR__)
     ->name('*.php')
     ->notName('*.blade.php')
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);
+
 
 return (new PhpCsFixer\Config())
     ->setRules([

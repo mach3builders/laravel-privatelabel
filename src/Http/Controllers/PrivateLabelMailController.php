@@ -5,12 +5,8 @@ namespace Mach3builders\PrivateLabel\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Http;
-use Mach3builders\PrivateLabel\Jobs\InstallSite;
 use Mach3builders\PrivateLabel\Jobs\InstallDomain;
 use Mach3builders\PrivateLabel\PrivateLabelFacade;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Mach3builders\PrivateLabel\Events\EmailDomainVerified;
-use Mach3builders\PrivateLabel\Http\Requests\UpdatePrivateLabelRequest;
 
 class PrivateLabelMailController extends Controller
 {
