@@ -4,6 +4,7 @@ return [
     'activating_ssl' => 'SSL certificaat activeren',
     'checking_dns_info' => 'Zorg ervoor dat het CNAME-record voor :domain verwijst naar '.config('private-label.domain').' Let op: Het kan maximaal 24 uur duren voordat een gewijzigde DNS instelling zichtbaar is.',
     'checking_dns' => 'Controleren DNS',
+    'priority' => 'Prioriteid',
     'choose_file' => 'Kies bestand',
     'domain_form_text' => 'Vul hier de domeinnaam in voor jouw Private Label omgeving. Deze domeinnaam moet in jouw bezit zijn. Vul de volledige naam in met "www". Het mag ook een subdomein (subdomein.jouwdomeinnaam.nl) zijn van jouw website.',
     'domain' => 'Domain',

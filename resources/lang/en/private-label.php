@@ -3,7 +3,8 @@
 return [
     'activating_ssl' => 'SSL certificaat activeren',
     'checking_dns_info' => 'Zorg ervoor dat het CNAME-record voor :domain verwijst naar '.config('private-label.domain').' Let op: Het kan maximaal 24 uur duren voordat een gewijzigde DNS instelling zichtbaar is.',
-    'checking_dns' => 'Controleren DNS',
+    'checking_dns' => 'Checing DNS',
+    'priority' => 'Priority',
     'domain_form_text' => 'Enter the domain name for your Private Label environment here. This domain name must be in your possession. Enter the full name with "www". It may also be a subdomain (subdomain.yourdomainname.nl) of your website.',
     'domain' => 'Domain',
     'email_form_text' => 'Enter the e-mail address that will be shown as the sender address to your customers with all e-mails that are sent from your Private Label environment.',
