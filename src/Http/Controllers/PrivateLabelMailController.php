@@ -52,10 +52,9 @@ class PrivateLabelMailController extends Controller
             if ($response->json('domain.state') == 'active') {
                 $label->setEmailVerified();
             } else {
-                $dns_records = collect();
-                $dns_records->push(...$response->json('receiving_dns_records', []));
-                $dns_records->push(...$response->json('sending_dns_records', []));
-                $data['dns_records'] = $dns_records;
+                $data['dns_records'] = collect()
+                    ->push(...$response->json('receiving_dns_records', []))
+                    ->push(...$response->json('sending_dns_records', []));
             }
         }
 
