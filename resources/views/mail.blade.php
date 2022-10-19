@@ -6,7 +6,7 @@
             {!! __('privatelabel::private-label.email_info') !!}
         </div>
 
-        @if ($private_label->email_domain && $private_label->email_verified)
+        @if ($private_label && $private_label->email_domain && $private_label->email_verified)
             <div class="alert alert-success">
                 {{ __('privatelabel::private-label.info_email_verified') }}
             </div>
@@ -28,9 +28,9 @@
                 </thead>
                 <tbody>
                     @foreach (session()->pull('dns_records') as $record)
-                        <tr >
-                            <td>Type: {{ $record['record_type'] }}</td>
-                            <td>{{ $record['name'] ?? '-' }}</td>
+                        <tr>
+                            <td>{{ $record['record_type'] }}</td>
+                            <td>{{ $record['name'] ?? $private_label->email_domain }}</td>
                             <td>{{ $record['priority'] ?? '-' }}</td>
                             <td style="overflow-wrap: anywhere;">{{ $record['value'] }}</td>
                         </tr>

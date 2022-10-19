@@ -16,7 +16,7 @@ class CreatePrivatelabelTable extends Migration
             $table->foreignId('owner_id')->constrained($model->getTable())->onDelete('cascade')->onUpdate('cascade');
             $table->string('domain');
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->integer('logo_login_height')->nullable();
             $table->integer('logo_app_height')->nullable();
 
