@@ -13,11 +13,13 @@ class EnsurePrivateLabelDomainIsSet
     public function handle($job, $next)
     {
         if (! $this->label || ! $this->label?->email_verified) {
+            config(['services.mailgun.domain' => env('MAILGUN_DOMAIN')]);
+
+            $next($job);
+        } else {
+            config(['services.mailgun.domain' => $this->label->email_domain]);
+
             $next($job);
         }
-
-        config(['services.mailgun.domain' => $this->label->email_domain]);
-
-        $next($job);
     }
 }
