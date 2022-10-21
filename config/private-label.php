@@ -40,5 +40,6 @@ return [
      */
     'mailgun' => [
         'api_token' => env('MAILGUN_API_TOKEN', ''),
+        'default_domain' => env('MAILGUN_DOMAIN', ''),
     ],
 ];
