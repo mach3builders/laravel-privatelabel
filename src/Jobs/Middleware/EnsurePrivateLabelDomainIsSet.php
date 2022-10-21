@@ -2,12 +2,10 @@
 
 namespace Mach3builders\PrivateLabel\Jobs\Middleware;
 
-use Mach3builders\PrivateLabel\Models\PrivateLabel;
-
 class EnsurePrivateLabelDomainIsSet
 {
     public function __construct(
-        public PrivateLabel $label
+        public $label
     ) {}
 
     public function handle($job, $next)
