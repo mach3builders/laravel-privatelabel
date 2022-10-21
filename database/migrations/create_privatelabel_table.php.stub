@@ -20,6 +20,7 @@ class CreatePrivatelabelTable extends Migration
             $table->integer('logo_login_height')->nullable();
             $table->integer('logo_app_height')->nullable();
 
+            $table->boolean('email_verified')->nullable();
             $table->string('status')->nullable();
             $table->unsignedBigInteger('forge_site_id')->nullable();
             $table->timestamps();
