@@ -18,6 +18,6 @@ class EnsurePrivateLabelDomainIsSet
 
         config(['services.mailgun.domain' => $this->label->email_domain]);
 
-        $next($job);
+        return $next($job);
     }
 }
