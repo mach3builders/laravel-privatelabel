@@ -13,7 +13,7 @@ class EnsurePrivateLabelDomainIsSet
         if ($this->label && $this->label->email_verified) {
             config(['services.mailgun.domain' => $this->label->email_domain]);
         } else {
-            config(['services.mailgun.domain' => config('private-label.owner_model')]);
+            config(['services.mailgun.domain' => config('private-label.mailgun.default_domain')]);
         }
 
         $next($job);
