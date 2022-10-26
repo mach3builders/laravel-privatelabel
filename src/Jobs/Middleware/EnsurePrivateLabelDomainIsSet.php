@@ -18,6 +18,11 @@ class EnsurePrivateLabelDomainIsSet
                 ->getSwiftMailer()
                 ->getTransport()
                 ->setDomain($this->label->email_domain);
+        } else {
+            app('mailer')
+                ->getSwiftMailer()
+                ->getTransport()
+                ->setDomain(config('private-label.mailgun.default_domain'));
         }
 
         $next($job);
