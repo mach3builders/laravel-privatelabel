@@ -2,6 +2,7 @@
 
 namespace Mach3builders\PrivateLabel\Jobs\Middleware;
 
+use Illuminate\Support\Facades\Mail;
 class EnsurePrivateLabelDomainIsSet
 {
     public function __construct(
@@ -10,10 +11,13 @@ class EnsurePrivateLabelDomainIsSet
 
     public function handle($job, $next)
     {
-        if ($this->label && $this->label->email_verified) {
-            config(['services.mailgun.domain' => $this->label->email_domain]);
-        } else {
-            config(['services.mailgun.domain' => config('private-label.mailgun.default_domain')]);
+        if ($this->label
+            && $this->label->email_verified
+            && Mail::getDefaultDriver() == 'mailgun') {
+            app('mailer')
+                ->getSwiftMailer()
+                ->getTransport()
+                ->setDomain($this->label->email_domain);
         }
 
         $next($job);
