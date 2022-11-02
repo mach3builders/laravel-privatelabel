@@ -17,6 +17,7 @@ class Forge
     public function createSite(PrivateLabel $private_label)
     {
         return $this->forge->setTimeout(300)->createSite(config('private-label.forge.server_id'), [
+            'site_name'     => $private_label->domain,
             'domain'        => $private_label->domain,
             'project_type'  => 'html',
             'directory'     => '/public',
