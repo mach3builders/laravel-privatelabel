@@ -10,8 +10,12 @@ return [
     'domain' => 'Domein',
     'email_form_text' => 'Vul hier het e-mailadres in dat als afzender adres wordt getoond aan jouw klanten bij systeem mails, welke verzonden worden vanuit jouw Private Label omgeving.',
     'email' => 'E-mailadres',
+    'email_info' => 'Via de e-mail instellingen kunt u de mail binnen uw account via het opgegeven e-mailadres versturen.
+    Na het opgeven van het e-mailadres kunt u het domein verifiëren. U krijgt een aantal DNS records te zien welke ingesteld dienen te worden in het domein van het opgegeven e-mailadres.
+    Als de DNS records correct zijn ingevuld worden de instellingen afgerond en wordt er vanaf dat moment gemaild met het opgegeven e-mailadres.',
     'favicon_form_text' => 'Upload hier het icoon dat getoond wordt in het browservenster tabblad.',
     'favicon' => 'Favicon',
+    'saved_and_installing_email' => 'Instellingen opgeslagen',
     'general' => 'Algemeen',
     'images' => 'Afbeeldingen',
     'info_email_verified' => 'Domein is geverifieerd',

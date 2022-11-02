@@ -10,6 +10,9 @@ return [
     'domain' => 'Domain',
     'email_form_text' => 'Enter here the e-mail address that will be shown as the sender address to your customers for system mails, which are sent from your Private Label environment.',
     'email' => 'Email address',
+    'email_info' => 'Via the email settings you can send the email within your account via the specified email address.
+    After entering the email address, you can verify the domain. You will see a number of DNS records that must be set in the domain of the specified email address.
+    If the DNS records have been entered correctly, the settings will be completed and from that moment on, email will be sent with the specified email address.',
     'favicon_form_text' => 'Upload here the icon shown in the browser window tab.',
     'favicon' => 'favicon',
     'images' => 'images',
@@ -31,6 +34,8 @@ return [
     'private-label' => 'Private label',
     'private label' => 'Private label',
     'save' => 'Save',
+    'saved_and_installing_email' => 'Settings saved',
+
     'verify' => 'Verify domain',
     'your_platform' => 'Your platform',
     'info' => '<strong> Attention! </strong> <br>
