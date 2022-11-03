@@ -14,7 +14,7 @@ class InstallSiteTest extends BaseTestCase
     /** @test */
     public function will_start_installing_site()
     {
-        $mock = $this->mock(Forge::class, function (MockInterface $mock) {
+        $this->mock(Forge::class, function (MockInterface $mock) {
             $mock->shouldReceive('createSite')->andReturn((object) [
                 'id' => 1
             ])->once()

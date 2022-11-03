@@ -3,11 +3,19 @@
 namespace Mach3builders\PrivateLabel;
 
 use Laravel\Forge\Forge;
+use Illuminate\Support\Facades\Gate;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class PrivateLabelServiceProvider extends PackageServiceProvider
 {
+    public function bootingPackage()
+    {
+        return Gate::define('viewPrivateLabel', function ($user, $owner_id) {
+            return app()->environment(['local', 'testing']);
+        });
+    }
+
     public function configurePackage(Package $package): void
     {
         $package

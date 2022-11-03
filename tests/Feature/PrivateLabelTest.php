@@ -17,7 +17,6 @@ class PrivateLabelTest extends BaseTestCase
         return array_merge([
             'domain' => 'www.mach3builders.nl',
             'name' => 'Mach3Builders',
-            'email' => 'info@mach3builders.nl',
             'logo_login_height' => 12,
             'logo_app_height' => 13,
             'logo_light' => UploadedFile::fake()->image('logo_light.png'),
@@ -50,7 +49,6 @@ class PrivateLabelTest extends BaseTestCase
         $this->assertDatabaseHas('private_labels', [
             'domain' => 'www.mach3builders.nl',
             'name' => 'Mach3Builders',
-            'email' => 'info@mach3builders.nl',
             'logo_login_height' => 12,
             'logo_app_height' => 13,
         ]);
@@ -79,7 +77,6 @@ class PrivateLabelTest extends BaseTestCase
 
         $this->assertDatabaseHas('private_labels', [
             'name' => 'Mach3Builders',
-            'email' => 'info@mach3builders.nl',
             'logo_login_height' => 12,
             'logo_app_height' => 13,
         ]);

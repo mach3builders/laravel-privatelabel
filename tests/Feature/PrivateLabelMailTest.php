@@ -141,7 +141,7 @@ class PrivateLabelMailTest extends BaseTestCase
                     "skip_verification": false,
                     "smtp_login": "postmaster@mach3test.com",
                     "spam_action": "disabled",
-                    "state": "verified",
+                    "state": "active",
                     "type": "custom",
                     "web_prefix": "email",
                     "web_scheme": "http",
