@@ -231,6 +231,19 @@ protected $listen = [
 ];
 ```
 
+### Authorization
+On every request made to the package the GATE viewPrivateLabel gets checked, please use this inside your application to add a secure entrance for your users. Place the following in your `authserviceprovider.php`
+```PHP
+function boot() 
+{
+    // ...
+    return Gate::define('viewPrivateLabel', function ($user, $owner_id) {
+        return app()->environment(['local', 'testing']);
+    });
+    // ...
+}
+```
+
 #### Methods
 The following method returns the owner of the private label.
 This corresponds with the owner model set in the config
