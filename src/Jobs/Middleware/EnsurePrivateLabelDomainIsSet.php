@@ -24,7 +24,7 @@ class EnsurePrivateLabelDomainIsSet
                 ->getTransport()
                 ->setDomain(config('private-label.mailgun.default_domain'));
         }
-w
+
         $next($job);
     }
 }
