@@ -11,9 +11,11 @@ class EnsurePrivateLabelDomainIsSet
 
     public function handle($job, $next)
     {
-        if ($this->label
-            && $this->label->email_verified
-            && Mail::getDefaultDriver() == 'mailgun') {
+        if (Mail::getDefaultDriver() != 'mailgun') {
+            return $next($job);
+        }
+
+        if ($this->label && $this->label->email_verified) {
             app('mailer')
                 ->getSwiftMailer()
                 ->getTransport()
