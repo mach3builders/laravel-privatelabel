@@ -271,7 +271,7 @@ composer test
 - [ ] Add cname capabilities
 - [x] fix poller
 - [x] Write api docs
-- [ ] Release v0.9
+- [x] Release v0.9
 - [ ] Add the changes from asana
 - [ ] Release v1
 
