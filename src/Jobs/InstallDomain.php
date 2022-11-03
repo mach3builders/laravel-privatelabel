@@ -19,8 +19,7 @@ class InstallDomain implements ShouldQueue
 
     public function __construct(
         public PrivateLabel $private_label
-    )
-    {
+    ) {
     }
 
     public function handle()

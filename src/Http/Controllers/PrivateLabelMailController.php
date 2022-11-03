@@ -12,7 +12,6 @@ class PrivateLabelMailController extends Controller
 {
     public function index(int $owner_id)
     {
-
         $owner = PrivateLabelFacade::findOwnerById($owner_id);
         $private_label = PrivateLabelFacade::findByOwnerId($owner_id);
 
