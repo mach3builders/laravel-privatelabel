@@ -3,7 +3,6 @@
 namespace Mach3builders\PrivateLabel\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Gate;
 use Mach3builders\PrivateLabel\Jobs\InstallSite;
 use Mach3builders\PrivateLabel\PrivateLabelFacade;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;

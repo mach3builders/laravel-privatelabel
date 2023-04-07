@@ -3,11 +3,13 @@
 namespace Mach3builders\PrivateLabel\Jobs\Middleware;
 
 use Illuminate\Support\Facades\Mail;
+
 class EnsurePrivateLabelDomainIsSet
 {
     public function __construct(
         public $label
-    ) {}
+    ) {
+    }
 
     public function handle($job, $next)
     {
