@@ -49,4 +49,19 @@ class Forge
             );
         }
     }
+
+    public function phpVersions()
+    {
+        return $this->forge->phpVersions(config('private-label.forge.server_id'));
+    }
+
+    public function sites()
+    {
+        return $this->forge->sites(config('private-label.forge.server_id'));
+    }
+
+    public function changeSitePHPVersion($site_id, $version)
+    {
+        $this->forge->setTimeout(300)->changeSitePHPVersion(config('private-label.forge.server_id'), $site_id, $version);
+    }
 }

@@ -5,6 +5,7 @@ namespace Mach3builders\PrivateLabel;
 use Laravel\Forge\Forge;
 use Illuminate\Support\Facades\Gate;
 use Spatie\LaravelPackageTools\Package;
+use Mach3builders\PrivateLabel\Console\UpdateLabelPhp;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class PrivateLabelServiceProvider extends PackageServiceProvider
@@ -22,6 +23,9 @@ class PrivateLabelServiceProvider extends PackageServiceProvider
             ->name('laravel-privatelabel')
             ->hasConfigFile('private-label')
             ->hasRoutes('web')
+            ->hasCommands([
+                UpdateLabelPhp::class,
+            ])
             ->hasViews()
             ->hasMigration('create_privatelabel_table')
             ->hasTranslations();
