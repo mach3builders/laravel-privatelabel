@@ -3,6 +3,7 @@
 namespace Mach3builders\PrivateLabel\Tests\Unit;
 
 use Mockery\MockInterface;
+use Illuminate\Support\Facades\Http;
 use Mach3builders\PrivateLabel\Services\Forge;
 use Mach3builders\PrivateLabel\Tests\BaseTestCase;
 
@@ -11,6 +12,10 @@ class UpdateLabelPhpTest extends BaseTestCase
     /** @test */
     public function can_update_all_sites_for_a_server()
     {
+        Http::fake([
+            'mach3builders.com*' => Http::response([], 200),
+        ]);
+
         $this->mock(Forge::class, function (MockInterface $mock) {
             $mock->shouldReceive('phpVersions')
                 ->once()
@@ -21,8 +26,8 @@ class UpdateLabelPhpTest extends BaseTestCase
                 ->shouldReceive('sites')
                 ->once()
                 ->andReturn([
-                    (object) ['id' => 1, 'name' => 'mach3builders.com', 'php_version' => '7.4'],
-                    (object) ['id' => 2, 'name' => 'mach3builders.com', 'php_version' => '7.4'],
+                    (object) ['id' => 1, 'name' => 'mach3builders.com', 'php_version' => '7.4', 'isSecured' => true],
+                    (object) ['id' => 2, 'name' => 'mach3builders.com', 'php_version' => '7.4', 'isSecured' => true],
                 ])
                 ->shouldReceive('changeSitePHPVersion')
                 ->once()
@@ -44,26 +49,11 @@ class UpdateLabelPhpTest extends BaseTestCase
             ->expectsOutput('Updated 2 websites to the php version: 7.4')
             ->expectsOutput('The script didnt update the php version for the server itself')
             ->expectsOutput('You need to do this manually')
+            ->expectsOutput('Checking all the sites for a 200')
+            ->expectsOutput('You can find all the sites in the sites.txt file')
+            ->expectsOutput('for a manual check')
             ->expectsOutput('Check all the deamons you have running')
             ->expectsOutput('Check all the crons you have running')
             ->assertExitCode(0);
-    }
-
-    /** @test */
-    public function will_ask_user_if_sure_to_update_all_websites()
-    {
-        $this->markTestIncomplete();
-    }
-
-    /** @test */
-    public function will_update_all_websites_to_new_php_version()
-    {
-        $this->markTestIncomplete();
-    }
-
-    /** @test */
-    public function will_send_done_message()
-    {
-        $this->markTestIncomplete();
     }
 }
