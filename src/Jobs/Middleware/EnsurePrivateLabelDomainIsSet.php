@@ -19,17 +19,16 @@ class EnsurePrivateLabelDomainIsSet
             return $next($job);
         }
 
-        if ($this->label && $this->label->email_verified) {
-            app('mailer')->setSymfonyTransport(
-                (new MailgunHttpTransport(config('services.mailgun.secret'), $this->label->email_domain))
-                    ->setHost(config('services.mailgun.endpoint'))
-            );
-        } else {
-            app('mailer')->setSymfonyTransport(
-                (new MailgunHttpTransport(config('services.mailgun.secret'), config('services.mailgun.domain')))
-                    ->setHost(config('services.mailgun.endpoint'))
-            );
-        }
+        $domain = $this->label?->email_verified
+            ? $this->label?->email_domain
+            : config('services.mailgun.domain');
+
+        $transport = (new MailgunHttpTransport(
+            config('services.mailgun.secret'),
+            $domain
+        ))->setHost(config('services.mailgun.endpoint'));
+
+        app('mailer')->setSymfonyTransport($transport);
 
         return $next($job);
     }
