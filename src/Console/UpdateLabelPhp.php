@@ -91,10 +91,10 @@ class UpdateLabelPhp extends Command
             $status = 'success';
 
             try {
-                Http::timeout(3)->get($url)->throw();
+                Http::retry(3, 500)->get($url)->throw();
             } catch (\Throwable $th) {
                 $this->newLine();
-                $this->error('Site: '.$url.' is returning a 200');
+                $this->error('Site: '.$url.' is not returning a 200');
                 $status = 'error';
             }
 
