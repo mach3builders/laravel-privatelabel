@@ -93,7 +93,7 @@ Place the index route in the menu
         <a href="{{ route('private-label.index', {REPLACE_WITH_OWNER_MODEL}) }}" class="nav-link{{ Route::is('private-label.*') ? ' active' : '' }}">
             <span class="ui-icon-text">
                 <i class="far fa-tag"></i>
-                <span>{{ _('Private label') }}</span>
+                <span>{{ __('Private label') }}</span>
             </span>
         </a>
     </li>
