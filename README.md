@@ -1,27 +1,27 @@
 # Add private label functionality to mach3laravel applications
 
-This is a package made for the laravel-starter, the package assumes the laravel-starter template has been used to create the project.
+This package is designed for the `laravel-starter`. It presupposes that your project was initiated using the `laravel-starter` template.
 
 ## Installation
 
-You can install the package via composer:
+Install the package via composer:
 
 ```bash
 composer require mach3builders/laravel-privatelabel
 ```
 
-Publish and run the migrations with:
+Publish and execute migrations:
 
 ```bash
 php artisan vendor:publish --provider="Mach3builders\PrivateLabel\PrivateLabelServiceProvider" --tag="privatelabel-migrations"
 ```
 
-Publish the config file with:
+Publish the configuration file:
 ```bash
 php artisan vendor:publish --provider="Mach3builders\PrivateLabel\PrivateLabelServiceProvider" --tag="privatelabel-config"
 ```
 
-This is the contents of the published config file:
+Here's the published configuration file:
 
 ```php
 return [
@@ -69,7 +69,7 @@ return [
 
 ```
 
-Add the following .env vars to your .env
+Add the following variables to your .env file:
 ```env
 PRIVATE_LABEL_DOMAIN=
 FORGE_SERVER_ID=
@@ -86,8 +86,8 @@ php artisan migrate
 
 ## Usage
 
-### Nav 
-Place the index route in the menu
+### Navigation
+Include the index route in your menu:
 ```html
     <li class="nav-item">
         <a href="{{ route('private-label.index', {REPLACE_WITH_OWNER_MODEL}) }}" class="nav-link{{ Route::is('private-label.*') ? ' active' : '' }}">
@@ -99,15 +99,15 @@ Place the index route in the menu
     </li>
 ```
 
-### Php
-Add the following trait to the owner model of the config
+### PHP
+Incorporate this trait into your owner model as specified in the config:
 ```php
 use Mach3builders\PrivateLabel\Traits\HasPrivateLabel;
 
 use HasPrivateLabel;
 ```
-### Js
-Add the following snippet inside your app.js
+### JavaScript
+Insert this snippet into your `app.js`:
 
 ```js
 import '@mach3builders/ui/dist/js/plugins/poller'
@@ -138,9 +138,8 @@ $('.private-label-poller').poller({
 })
 ```
 
-### Using the label trough the app
-When given the ability to make a private label you do want to show the required logo / mail etc
-to make it easy copy the following code to your `Brand.php`
+### Brand Customization
+To easily manage brand-specific elements like logos and favicons, use this `Brand.php` template:
 
 ```php
 <?php
@@ -197,9 +196,8 @@ class Brand
 }
 ```
 
-### Label api
-The package adds an `label()` helper
-below are all the methods / properties you can access trough this helper
+### Label API
+The `label()` helper is provided by this package. Here are the methods and properties you can access:
 
 #### Properties
 ```php
@@ -221,7 +219,7 @@ protected $statusses = [
 The email page gives the user the possibility to add a email to their private label. The domain of that email then gets added to the mailgun account of m3b.
 The user then has the ability to verify that this domain has been added and is verified.
 
-After the domain has been verified the event EVENT gets triggered. So if your application would like to do something based on that you can adde the follow code to your `EventServiceProvider`
+After the domain has been verified the `EmailDomainVerified` event gets dispatched. See the following example on how to listen to this event.
 ```PHP
 protected $listen = [
     // ...
@@ -232,7 +230,7 @@ protected $listen = [
 ```
 
 ### Authorization
-On every request made to the package the GATE viewPrivateLabel gets checked, please use this inside your application to add a secure entrance for your users. Place the following in your `authserviceprovider.php`
+Use the `viewPrivateLabel` gate for secure access. Add this to your `AuthServiceProvider.php`:
 ```PHP
 function boot() 
 {
