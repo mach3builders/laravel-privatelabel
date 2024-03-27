@@ -2,13 +2,13 @@
 
 namespace Mach3builders\PrivateLabel\Jobs;
 
-use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Mach3builders\PrivateLabel\Models\PrivateLabel;
 
 class InstallDomain implements ShouldQueue

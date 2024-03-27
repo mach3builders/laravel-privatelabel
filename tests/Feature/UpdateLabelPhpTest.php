@@ -2,10 +2,10 @@
 
 namespace Mach3builders\PrivateLabel\Tests\Unit;
 
-use Mockery\MockInterface;
 use Illuminate\Support\Facades\Http;
 use Mach3builders\PrivateLabel\Services\Forge;
 use Mach3builders\PrivateLabel\Tests\BaseTestCase;
+use Mockery\MockInterface;
 
 class UpdateLabelPhpTest extends BaseTestCase
 {

@@ -2,14 +2,14 @@
 
 namespace Mach3builders\PrivateLabel\Tests\Feature;
 
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
-use Mach3builders\PrivateLabel\Jobs\InstallDomain;
-use Mach3builders\PrivateLabel\Tests\BaseTestCase;
-use Mach3builders\PrivateLabel\Models\PrivateLabel;
-use Mach3builders\PrivateLabel\Tests\Fixtures\Owner;
 use Mach3builders\PrivateLabel\Events\EmailDomainVerified;
+use Mach3builders\PrivateLabel\Jobs\InstallDomain;
+use Mach3builders\PrivateLabel\Models\PrivateLabel;
+use Mach3builders\PrivateLabel\Tests\BaseTestCase;
+use Mach3builders\PrivateLabel\Tests\Fixtures\Owner;
 
 class PrivateLabelMailTest extends BaseTestCase
 {
@@ -26,7 +26,7 @@ class PrivateLabelMailTest extends BaseTestCase
         $owner = Owner::factory()->create();
         PrivateLabel::factory()->state(['owner_id' => $owner->id])->create();
 
-        $this->get('app/private-label/'. $owner->id.'/mail')
+        $this->get('app/private-label/'.$owner->id.'/mail')
             ->assertOk();
     }
 
@@ -38,7 +38,7 @@ class PrivateLabelMailTest extends BaseTestCase
         $owner = Owner::factory()->create();
         PrivateLabel::factory()->state(['owner_id' => $owner->id])->create();
 
-        $this->patch('app/private-label/'. $owner->id.'/mail', $this->validData())
+        $this->patch('app/private-label/'.$owner->id.'/mail', $this->validData())
             ->assertRedirect()
             ->assertSessionHasNoErrors();
 
@@ -117,8 +117,8 @@ class PrivateLabelMailTest extends BaseTestCase
         $owner = Owner::factory()->create();
         $label = PrivateLabel::factory()->state(['owner_id' => $owner->id])->create();
 
-        $this->get('app/private-label/'. $owner->id.'/mail');
-        $this->post('app/private-label/'. $owner->id.'/mail/verify')
+        $this->get('app/private-label/'.$owner->id.'/mail');
+        $this->post('app/private-label/'.$owner->id.'/mail/verify')
             ->assertRedirect();
 
         Event::assertNotDispatched(EmailDomainVerified::class);
@@ -193,7 +193,7 @@ class PrivateLabelMailTest extends BaseTestCase
         $owner = Owner::factory()->create();
         $label = PrivateLabel::factory()->state(['owner_id' => $owner->id])->create();
 
-        $this->post('app/private-label/'. $owner->id.'/mail/verify')
+        $this->post('app/private-label/'.$owner->id.'/mail/verify')
             ->assertRedirect();
 
         Event::assertDispatched(EmailDomainVerified::class);

@@ -81,7 +81,7 @@ class UpdateLabelPhp extends Command
 
         $this->newLine();
 
-        $sites_text = fopen("sites.txt", "w") or die("Unable to open file!");
+        $sites_text = fopen('sites.txt', 'w') or exit('Unable to open file!');
 
         foreach ($sites as $site) {
             $url = $site->isSecured
@@ -98,7 +98,7 @@ class UpdateLabelPhp extends Command
                 $status = 'error';
             }
 
-            fwrite($sites_text, $url." ".$status."\n");
+            fwrite($sites_text, $url.' '.$status."\n");
         }
 
         fclose($sites_text);
@@ -112,6 +112,7 @@ class UpdateLabelPhp extends Command
 
         $this->line('Check all the deamons you have running');
         $this->line('Check all the crons you have running');
+
         return COMMAND::SUCCESS;
     }
 }

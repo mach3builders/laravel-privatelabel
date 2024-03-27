@@ -6,8 +6,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 use Mach3builders\PrivateLabel\Jobs\InstallSite;
-use Mach3builders\PrivateLabel\Tests\BaseTestCase;
 use Mach3builders\PrivateLabel\Models\PrivateLabel;
+use Mach3builders\PrivateLabel\Tests\BaseTestCase;
 use Mach3builders\PrivateLabel\Tests\Fixtures\Owner;
 
 class PrivateLabelTest extends BaseTestCase
@@ -30,7 +30,7 @@ class PrivateLabelTest extends BaseTestCase
     {
         $owner = Owner::factory()->create();
 
-        $this->get('app/private-label/'. $owner->id)
+        $this->get('app/private-label/'.$owner->id)
             ->assertOk();
     }
 
@@ -42,7 +42,7 @@ class PrivateLabelTest extends BaseTestCase
 
         $owner = Owner::factory()->create();
 
-        $this->patch('app/private-label/'. $owner->id, $this->validData())
+        $this->patch('app/private-label/'.$owner->id, $this->validData())
             ->assertRedirect()
             ->assertSessionHasNoErrors();
 
@@ -71,7 +71,7 @@ class PrivateLabelTest extends BaseTestCase
         $owner = Owner::factory()->create();
         PrivateLabel::factory()->state(['owner_id' => $owner->id])->create();
 
-        $this->patch('app/private-label/'. $owner->id, $this->validData())
+        $this->patch('app/private-label/'.$owner->id, $this->validData())
             ->assertRedirect()
             ->assertSessionHasNoErrors();
 

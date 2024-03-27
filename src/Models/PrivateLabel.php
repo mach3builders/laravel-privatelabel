@@ -2,18 +2,18 @@
 
 namespace Mach3builders\PrivateLabel\Models;
 
-use Spatie\MediaLibrary\HasMedia;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Mach3builders\PrivateLabel\Traits\HasStatus;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Mach3builders\PrivateLabel\Traits\HasStatus;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class PrivateLabel extends Model implements HasMedia
 {
     use HasFactory;
-    use InteractsWithMedia;
     use HasStatus;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'forge_site_id',
@@ -43,8 +43,8 @@ class PrivateLabel extends Model implements HasMedia
         if (! $this->email) {
             return null;
         }
-        
-        return substr(strrchr($this->email, "@"), 1);
+
+        return substr(strrchr($this->email, '@'), 1);
     }
 
     public function checkDns(): bool
@@ -62,7 +62,7 @@ class PrivateLabel extends Model implements HasMedia
     public function setEmailVerified()
     {
         $this->update([
-            'email_verified' => true
+            'email_verified' => true,
         ]);
 
         \Mach3builders\PrivateLabel\Events\EmailDomainVerified::dispatch($this);

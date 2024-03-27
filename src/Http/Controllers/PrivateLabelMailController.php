@@ -21,14 +21,14 @@ class PrivateLabelMailController extends Controller
     public function update(Request $request, int $owner_id)
     {
         $attributes = $request->validate([
-            'email' => 'required|email:rfc'
+            'email' => 'required|email:rfc',
         ]);
 
         $label = PrivateLabelFacade::findByOwnerId($owner_id);
 
         $label->update([
             'email' => $attributes['email'],
-            'email_verified' => false
+            'email_verified' => false,
         ]);
 
         InstallDomain::dispatch($label);

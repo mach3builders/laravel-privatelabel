@@ -3,12 +3,12 @@
 namespace Mach3builders\PrivateLabel\Jobs;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Mach3builders\PrivateLabel\Services\Forge;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Mach3builders\PrivateLabel\Models\PrivateLabel;
+use Mach3builders\PrivateLabel\Services\Forge;
 
 class InstallSite implements ShouldQueue
 {
@@ -34,18 +34,18 @@ class InstallSite implements ShouldQueue
     {
         if (! $this->private_label->checkDns()) {
             self::dispatch($this->private_label)
-                    ->delay(now()->addMinute());
+                ->delay(now()->addMinute());
 
             return;
         } else {
             $this->private_label->update([
-                'status' => 'dns_validated'
+                'status' => 'dns_validated',
             ]);
         }
 
         if (! $this->private_label->forge_site_id) {
             $this->private_label->update([
-                'status' => 'site_installing'
+                'status' => 'site_installing',
             ]);
 
             $site = $forge->createSite($this->private_label);
@@ -59,7 +59,7 @@ class InstallSite implements ShouldQueue
         $forge->createCertificate($this->private_label);
 
         $this->private_label->update([
-            'status' => 'site_installed'
+            'status' => 'site_installed',
         ]);
     }
 }

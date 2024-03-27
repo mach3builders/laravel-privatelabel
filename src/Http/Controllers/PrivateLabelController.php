@@ -3,10 +3,10 @@
 namespace Mach3builders\PrivateLabel\Http\Controllers;
 
 use Illuminate\Routing\Controller;
+use Mach3builders\PrivateLabel\Http\Requests\UpdatePrivateLabelRequest;
 use Mach3builders\PrivateLabel\Jobs\InstallSite;
 use Mach3builders\PrivateLabel\PrivateLabelFacade;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Mach3builders\PrivateLabel\Http\Requests\UpdatePrivateLabelRequest;
 
 class PrivateLabelController extends Controller
 {
@@ -40,7 +40,7 @@ class PrivateLabelController extends Controller
 
         if ($private_label->wasRecentlyCreated) {
             $private_label->update([
-                'status' => 'dns_validating'
+                'status' => 'dns_validating',
             ]);
 
             InstallSite::dispatch($private_label);

@@ -2,10 +2,10 @@
 
 namespace Mach3builders\PrivateLabel\Events;
 
-use Illuminate\Queue\SerializesModels;
+use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Queue\SerializesModels;
 use Mach3builders\PrivateLabel\Models\PrivateLabel;
 
 class EmailDomainVerified

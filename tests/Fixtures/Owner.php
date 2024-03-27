@@ -2,10 +2,10 @@
 
 namespace Mach3builders\PrivateLabel\Tests\Fixtures;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Mach3builders\PrivateLabel\Traits\HasPrivateLabel;
+use Illuminate\Database\Eloquent\Model;
 use Mach3builders\PrivateLabel\Interfaces\OwnsPrivateLabel;
+use Mach3builders\PrivateLabel\Traits\HasPrivateLabel;
 
 class Owner extends Model implements OwnsPrivateLabel
 {

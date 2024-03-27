@@ -12,8 +12,8 @@ class PrivateLabel
     {
         if (empty($this->label)) {
             $this->label = Model::query()
-                                ->where('domain', request()->server('HTTP_HOST'))
-                                ->first();
+                ->where('domain', request()->server('HTTP_HOST'))
+                ->first();
         }
 
         return $this->label;

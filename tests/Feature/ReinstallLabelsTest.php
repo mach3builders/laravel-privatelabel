@@ -2,11 +2,11 @@
 
 namespace Mach3builders\PrivateLabel\Tests\Unit;
 
-use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Queue;
 use Mach3builders\PrivateLabel\Jobs\InstallSite;
-use Mach3builders\PrivateLabel\Tests\BaseTestCase;
 use Mach3builders\PrivateLabel\Models\PrivateLabel;
+use Mach3builders\PrivateLabel\Tests\BaseTestCase;
 
 class ReinstallLabelsTest extends BaseTestCase
 {
