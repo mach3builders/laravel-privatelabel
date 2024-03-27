@@ -27,6 +27,10 @@ class Reinstall extends Command
         }
 
         $this->withProgressBar($labels, function ($label) {
+            $label->update([
+                'status' => 'dns_validating',
+            ]);
+
             InstallSite::dispatch($label);
         });
     }
