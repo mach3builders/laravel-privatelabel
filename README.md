@@ -242,7 +242,7 @@ function boot()
 }
 ```
 
-#### Methods
+### Methods
 The following method returns the owner of the private label.
 This corresponds with the owner model set in the config
 ```php
@@ -261,32 +261,38 @@ public function registerMediaCollections(): void
 }
 ```
 
+### Commands
+The packages comes with 2 commands, one to update all php versions of the private labels and one to reinstall all private labels on the forge server.
+
+
+#### Reinstall labels
+the following command will reinstall all private labels on the forge server. The private label will be updated to status `dns_validating` and will go trough the process of being installed on the server.
+
+To reinstall all labels use: 
+```bash
+php artisan label:reinstall
+```
+
+To reinstall a specific label use:
+```bash 
+php artisan label:reinstall --label=LABEL_ID
+```
+
+#### Update label php versions
+The following command will update all the php versions of the private labels. The php version will be updated to the latest version available on the forge server. Or to the version specified in the prompts asked to the user when running the command
+
+```bash
+php artisan label:update-php
+```
+
 ## Testing
 
 ```bash
 composer test
 ```
 
-## Roadmap
-- [x] Setup tests
-- [x] Make parent model config
-- [x] Test job
-- [x] Make sure all test runs
-- [x] Write install instructions
-- [x] Add it to a project
-- [ ] Setup github actions
-- [ ] Test package on php 7.3
-- [ ] Test package on php 7.4
-- [ ] Test package on php 8.0
-- [ ] Publish package after all tests have ran
-- [ ] Add cname capabilities
-- [x] fix poller
-- [x] Write api docs
-- [x] Release v0.9
-- [ ] Add the changes from asana
-- [ ] Release v1
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
+## Code styling
+All code should be styled using the following command:
+```bash
+composer pint
+```
