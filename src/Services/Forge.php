@@ -30,7 +30,7 @@ class Forge
 
         $content = str_replace(
             'root /home/forge/'.$private_label->domain.'/public;',
-            'root /home/forge/'.config('private-label.domain').'/public;',
+            'root /home/forge/'.config('private-label.main_domain').'/public;',
             $content
         );
 

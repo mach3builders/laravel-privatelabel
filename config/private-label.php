@@ -27,6 +27,11 @@ return [
     'domain' => env('PRIVATE_LABEL_DOMAIN'),
 
     /**
+     * The domain that runs the main app this is used for the nginx template
+     */
+    'main_domain' => env('PRIVATE_LABEL_MAIN_DOMAIN'),
+
+    /**
      * Forge information
      */
     'forge' => [

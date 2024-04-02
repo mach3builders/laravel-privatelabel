@@ -45,6 +45,11 @@ return [
      */
     'route_prefix' => 'app',
 
+   /**
+     * The domain that runs the main app this is used for the nginx template
+     */
+    'main_domain' => env('PRIVATE_LABEL_MAIN_DOMAIN'),
+    
     /**
      * The domain every label needs to be cnamed to
      */
