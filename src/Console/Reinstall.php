@@ -29,6 +29,7 @@ class Reinstall extends Command
         $this->withProgressBar($labels, function ($label) {
             $label->update([
                 'status' => 'dns_validating',
+                'forge_site_id' => null
             ]);
 
             InstallSite::dispatch($label);
