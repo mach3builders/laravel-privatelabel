@@ -301,3 +301,84 @@ All code should be styled using the following command:
 ```bash
 composer pint
 ```
+
+### Installing caddy on the server
+The private label will rely on caddy to handle the ssl.
+The main app will also need to be running on port 8080.
+
+To make the main app run on 8080, change the nginx of the main app to listen on 8080.
+
+New way
+```nginx
+server {
+    listen 8080 default_server;
+    listen [::]:8080 default_server;
+    ....
+}
+```
+
+
+Default way for https
+```nginx
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    ....
+}
+```
+
+Default way for http
+```nginx
+server {
+    listen 80 ssl http2;
+    listen [::]:80 ssl http2;
+    ....
+}
+```
+
+Next step is to install Caddy on the server
+Follow [https://caddyserver.com/docs/install#debian-ubuntu-raspbian](https://caddyserver.com/docs/install#debian-ubuntu-raspbian)
+
+
+After this create a Caddyfile at `/etc/caddy/Caddyfile` with the following content
+```caddy
+# Global options block
+{
+    on_demand_tls {
+        ask https://test-app.mach3cart.nl/caddy/allowed-domains # API endpoint to validate the incoming domain
+    }
+}
+
+# Main app configuration
+test-app.mach3cart.nl {
+    tls info@mach3builders.nl
+
+    # Forward to NGINX or app
+    reverse_proxy localhost:8080
+}
+
+# Catch-all for custom subdomains
+:443 {
+    tls {
+        on_demand
+    }
+
+    # Forward traffic to NGINX or app
+    reverse_proxy localhost:8080
+}
+
+# Redirect all HTTP traffic to HTTPS globally
+http:// {
+    redir https://{host}{uri}
+}
+```
+
+Small note, the `allowed-domains` endpoint should return a 200 if the domain is allowed.
+The allowed domains endpoint receives a `domain` GET parameter.
+
+```bash
+curl "https://test-app.mach3cart.nl/caddy/allowed-domains?domain=test-label.sellwise.io"
+```
+
+
+Nginx should be running on 8080
