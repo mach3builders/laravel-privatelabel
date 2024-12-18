@@ -307,6 +307,7 @@ The private label will rely on caddy to handle the ssl.
 The main app will also need to be running on port 8080.
 
 To make the main app run on 8080, change the nginx of the main app to listen on 8080.
+Change this in the ngin config, this can be done trough forge >> edit files >> edit nginx
 
 New way
 ```nginx
@@ -336,11 +337,13 @@ server {
 }
 ```
 
-Next step is to install Caddy on the server
+Restart the nginx service trough forge
+
+
+### Next step is to install Caddy on the server
 Follow [https://caddyserver.com/docs/install#debian-ubuntu-raspbian](https://caddyserver.com/docs/install#debian-ubuntu-raspbian)
 
-
-After this create a Caddyfile at `/etc/caddy/Caddyfile` with the following content
+After this overwrite the Caddyfile at `/etc/caddy/Caddyfile` with the following content
 ```caddy
 # Global options block
 {
@@ -376,9 +379,20 @@ http:// {
 Small note, the `allowed-domains` endpoint should return a 200 if the domain is allowed.
 The allowed domains endpoint receives a `domain` GET parameter.
 
+Test the code
 ```bash
 curl "https://test-app.mach3cart.nl/caddy/allowed-domains?domain=test-label.sellwise.io"
 ```
 
+Example code
+```php
+Route::get('/caddy/allowed-domains', function (Request $request) {
+    $domain = $request->query('domain');
 
-Nginx should be running on 8080
+    if (in_array($domain, ['test-label.sellwise.io'])) {
+        return response('', 200);
+    }
+
+    return response('', 403);
+});
+```
