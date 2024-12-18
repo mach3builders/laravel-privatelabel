@@ -307,7 +307,7 @@ The private label will rely on caddy to handle the ssl.
 The main app will also need to be running on port 8080.
 
 To make the main app run on 8080, change the nginx of the main app to listen on 8080.
-Change this in the ngin config, this can be done trough forge >> edit files >> edit nginx
+Change this in the ngin config, this can be done trough forge >> site >> >> edit files >> edit nginx
 
 New way
 ```nginx
@@ -337,8 +337,30 @@ server {
 }
 ```
 
-Restart the nginx service trough forge
+Also comment out the first line of the nginx config
 
+Then ssh into the server and remove the 000-catch-all symlink in /etc/nginx/sites-enabled
+
+```bash
+cd /etc/nginx/sites-enabled
+sudo rm 000-catch-all
+```
+
+Restart the nginx service trough forge, or with the following command
+```bash
+sudo service nginx restart
+```
+
+To check if the app now runs on 8080 run the following command
+```bash
+sudo lsof -i -P -n
+```
+
+You will see all the ports listening on the server, check for  
+```TCP *:8080 (LISTEN)``` This is good!
+```TCP *:80 (LISTEN)``` This is bad...
+
+If you still see :80, then check all the above again.
 
 ### Next step is to install Caddy on the server
 Follow [https://caddyserver.com/docs/install#debian-ubuntu-raspbian](https://caddyserver.com/docs/install#debian-ubuntu-raspbian)
