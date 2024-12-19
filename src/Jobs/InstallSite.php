@@ -47,8 +47,10 @@ class InstallSite implements ShouldQueue
         $response = Http::timeout(30)->get('https://'.$this->private_label->domain.'/');
 
         if (! $response->successful()) {
-            self::dispatch($this->private_label)
-                ->delay(now()->addMinute());
+            if (! app()->runningUnitTests()) {
+                self::dispatch($this->private_label)
+                    ->delay(now()->addMinute());
+            }
 
             return;
         }
