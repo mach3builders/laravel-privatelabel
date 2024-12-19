@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Mach3builders\PrivateLabel\Services\Forge;
 
+// @deprecated 3.0
 class UpdateLabelPhp extends Command
 {
     protected $signature = 'label:update-php';

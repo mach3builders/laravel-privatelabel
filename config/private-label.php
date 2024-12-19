@@ -32,16 +32,7 @@ return [
     'main_domain' => env('PRIVATE_LABEL_MAIN_DOMAIN'),
 
     /**
-     * Forge information
-     */
-    'forge' => [
-        'api_token' => env('FORGE_API_TOKEN'),
-        'server_id' => env('FORGE_SERVER_ID'),
-        'server_ip' => env('FORGE_SERVER_IP'),
-    ],
-
-    /**
-     * Forge information
+     * Mailgun information
      */
     'mailgun' => [
         'api_token' => env('MAILGUN_API_TOKEN', ''),

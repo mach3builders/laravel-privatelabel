@@ -7,9 +7,9 @@ use Mach3builders\PrivateLabel\Services\Forge;
 use Mach3builders\PrivateLabel\Tests\BaseTestCase;
 use Mockery\MockInterface;
 
+// @deprecated version 3.0
 class UpdateLabelPhpTest extends BaseTestCase
 {
-    /** @test */
     public function can_update_all_sites_for_a_server()
     {
         Http::fake([

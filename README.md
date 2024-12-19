@@ -55,17 +55,9 @@ return [
      */
     'domain' => env('PRIVATE_LABEL_DOMAIN'),
 
-    /**
-     * Forge information
-     */
-    'forge' => [
-        'api_token' => env('FORGE_API_TOKEN'),
-        'server_id' => env('FORGE_SERVER_ID'),
-        'server_ip' => env('FORGE_SERVER_IP'),
-    ],
 
     /**
-     * Forge information
+     * Mailgun information
      */
     'mailgun' => [
         'api_token' => env('MAILGUN_API_TOKEN', ''),
@@ -77,9 +69,6 @@ return [
 Add the following variables to your .env file:
 ```env
 PRIVATE_LABEL_DOMAIN=
-FORGE_SERVER_ID=
-FORGE_API_TOKEN=
-FORGE_SERVER_IP=
 MAILGUN_API_TOKEN=
 ```
 
@@ -267,11 +256,10 @@ public function registerMediaCollections(): void
 ```
 
 ### Commands
-The packages comes with 2 commands, one to update all php versions of the private labels and one to reinstall all private labels on the forge server.
-
+The packages comes with some helper commands
 
 #### Reinstall labels
-the following command will reinstall all private labels on the forge server. The private label will be updated to status `dns_validating` and will go trough the process of being installed on the server.
+the following command will reinstall all private labels. The private label will be updated to status `dns_validating` and will go trough the process of being installed on the server.
 
 To reinstall all labels use: 
 ```bash
@@ -283,7 +271,7 @@ To reinstall a specific label use:
 php artisan label:reinstall --label=LABEL_ID
 ```
 
-#### Update label php versions
+#### Update label php versions [DEPRECATED]
 The following command will update all the php versions of the private labels. The php version will be updated to the latest version available on the forge server. Or to the version specified in the prompts asked to the user when running the command
 
 ```bash

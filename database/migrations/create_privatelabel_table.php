@@ -22,7 +22,6 @@ class CreatePrivatelabelTable extends Migration
 
             $table->boolean('email_verified')->nullable();
             $table->string('status')->nullable();
-            $table->unsignedBigInteger('forge_site_id')->nullable();
             $table->timestamps();
         });
     }

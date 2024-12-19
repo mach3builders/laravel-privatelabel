@@ -16,7 +16,6 @@ class PrivateLabel extends Model implements HasMedia
     use InteractsWithMedia;
 
     protected $fillable = [
-        'forge_site_id',
         'domain',
         'name',
         'email',

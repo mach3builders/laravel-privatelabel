@@ -3,7 +3,6 @@
 namespace Mach3builders\PrivateLabel;
 
 use Illuminate\Support\Facades\Gate;
-use Laravel\Forge\Forge;
 use Mach3builders\PrivateLabel\Console\Reinstall;
 use Mach3builders\PrivateLabel\Console\UpdateLabelPhp;
 use Spatie\LaravelPackageTools\Package;
@@ -31,9 +30,5 @@ class PrivateLabelServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasMigration('create_privatelabel_table')
             ->hasTranslations();
-
-        $this->app->bind(Forge::class, function () {
-            return new Forge(config('private-label.forge.api_token'));
-        });
     }
 }
