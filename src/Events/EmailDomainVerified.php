@@ -19,8 +19,7 @@ class EmailDomainVerified
      */
     public function __construct(
         public PrivateLabel $label
-    ) {
-    }
+    ) {}
 
     /**
      * Get the channels the event should broadcast on.

@@ -2,12 +2,10 @@
 
 namespace Mach3builders\PrivateLabel\Tests\Unit;
 
-use Mockery\MockInterface;
 use Illuminate\Support\Facades\Http;
-use Mach3builders\PrivateLabel\Services\Forge;
 use Mach3builders\PrivateLabel\Jobs\InstallSite;
-use Mach3builders\PrivateLabel\Tests\BaseTestCase;
 use Mach3builders\PrivateLabel\Models\PrivateLabel;
+use Mach3builders\PrivateLabel\Tests\BaseTestCase;
 use Mach3builders\PrivateLabel\Tests\Fixtures\Owner;
 
 class InstallSiteTest extends BaseTestCase

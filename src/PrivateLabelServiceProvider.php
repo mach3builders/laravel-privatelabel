@@ -4,9 +4,9 @@ namespace Mach3builders\PrivateLabel;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
-use Spatie\LaravelPackageTools\Package;
 use Mach3builders\PrivateLabel\Console\Reinstall;
 use Mach3builders\PrivateLabel\Console\UpdateLabelPhp;
+use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class PrivateLabelServiceProvider extends PackageServiceProvider

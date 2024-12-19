@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 abstract class BaseTestCase extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -35,12 +35,12 @@ abstract class BaseTestCase extends TestCase
         ]);
 
         include_once __DIR__.'/../database/migrations/create_privatelabel_table.php';
-        (new \CreatePrivatelabelTable())->up();
+        (new \CreatePrivatelabelTable)->up();
 
         include_once __DIR__.'/../database/migrations/create_media_table.php';
-        (new \CreateMediaTable())->up();
+        (new \CreateMediaTable)->up();
 
         include_once __DIR__.'/../database/migrations/create_owner_table.php';
-        (new \CreateOwnerTable())->up();
+        (new \CreateOwnerTable)->up();
     }
 }
