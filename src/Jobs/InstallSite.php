@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Http;
 use Mach3builders\PrivateLabel\Models\PrivateLabel;
 use Mach3builders\PrivateLabel\Services\Forge;
 
@@ -24,13 +25,13 @@ class InstallSite implements ShouldQueue
     }
 
     /**
-     * 2. Create site
-     * 3. Update nginx
-     * 4. Create certificate
+     * 1. Check DNS
+     * 2. Request url so caddy can request ssl
+     * 3. Enjoy
      *
      * @return void
      */
-    public function handle(Forge $forge)
+    public function handle()
     {
         if (! $this->private_label->checkDns()) {
             self::dispatch($this->private_label)
@@ -43,20 +44,19 @@ class InstallSite implements ShouldQueue
             ]);
         }
 
-        if (! $this->private_label->forge_site_id) {
-            $this->private_label->update([
-                'status' => 'site_installing',
-            ]);
+        // When the dns is validated we can install the site aka send a get request
+        $this->private_label->update([
+            'status' => 'site_installing',
+        ]);
 
-            $site = $forge->createSite($this->private_label);
+        $response = Http::timeout(30)->get('https://'.$this->private_label->domain.'/');
 
-            $this->private_label->forge_site_id = $site->id;
-            $this->private_label->save();
+        if (! $response->successful()) {
+            self::dispatch($this->private_label)
+                ->delay(now()->addMinute());
+
+            return;
         }
-
-        $forge->updateNginx($this->private_label);
-
-        $forge->createCertificate($this->private_label);
 
         $this->private_label->update([
             'status' => 'site_installed',
