@@ -13,7 +13,7 @@ class PrivateLabelServiceProvider extends PackageServiceProvider
 {
     public function bootingPackage()
     {
-        if (app()->environment('testing')) {
+        if (app()->runningUnitTests()) {
             Http::preventStrayRequests();
         }
 
