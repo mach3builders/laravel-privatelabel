@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Mach3builders\PrivateLabel\Http\Controllers\PrivateLabelController;
 use Mach3builders\PrivateLabel\Http\Controllers\PrivateLabelMailController;
+use Mach3builders\PrivateLabel\Http\Controllers\CaddyAllowedDomainsController;
 
 // Private label
 Route::prefix(config('private-label.route_prefix'))->middleware(config('private-label.middleware'))->group(function () {
@@ -15,3 +16,6 @@ Route::prefix(config('private-label.route_prefix'))->middleware(config('private-
     Route::patch('private-label/{owner_id}/mail', [PrivateLabelMailController::class, 'update'])->name('private-label.mail.update');
     Route::post('private-label/{owner_id}/mail/verify', [PrivateLabelMailController::class, 'verify'])->name('private-label.mail.verify');
 });
+
+// Caddy
+Route::get('caddy/allowed-domains', [CaddyAllowedDomainsController::class, 'index'])->name('caddy.allowed-domains.index');
