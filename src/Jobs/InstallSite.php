@@ -38,10 +38,6 @@ class InstallSite implements ShouldQueue
                 ->delay(now()->addMinute());
 
             return;
-        } else {
-            $this->private_label->update([
-                'status' => 'dns_validated',
-            ]);
         }
 
         // When the dns is validated we can install the site aka send a get request
