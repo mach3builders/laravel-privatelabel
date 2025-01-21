@@ -386,6 +386,14 @@ http:// {
 }
 ```
 
+## Start caddy
+After installing caddy start the server and you are ready to go!
+
+```bash
+sudo service caddy start
+```
+
+
 Small note, the `allowed-domains` endpoint should return a 200 if the domain is allowed.
 The allowed domains endpoint receives a `domain` GET parameter.
 
