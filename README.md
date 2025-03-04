@@ -17,6 +17,7 @@ php artisan vendor:publish --provider="Mach3builders\PrivateLabel\PrivateLabelSe
 ```
 
 Publish the configuration file:
+
 ```bash
 php artisan vendor:publish --provider="Mach3builders\PrivateLabel\PrivateLabelServiceProvider" --tag="privatelabel-config"
 ```
@@ -49,7 +50,7 @@ return [
      * The domain that runs the main app this is used for the nginx template
      */
     'main_domain' => env('PRIVATE_LABEL_MAIN_DOMAIN'),
-    
+
     /**
      * The domain every label needs to be cnamed to
      */
@@ -75,6 +76,7 @@ return [
 ```
 
 Add the following variables to your .env file:
+
 ```env
 PRIVATE_LABEL_DOMAIN=
 FORGE_SERVER_ID=
@@ -92,58 +94,68 @@ php artisan migrate
 ## Usage
 
 ### Navigation
+
 Include the index route in your menu:
+
 ```html
-    <li class="nav-item">
-        <a href="{{ route('private-label.index', {REPLACE_WITH_OWNER_MODEL}) }}" class="nav-link{{ Route::is('private-label.*') ? ' active' : '' }}">
-            <span class="ui-icon-text">
-                <i class="far fa-tag"></i>
-                <span>{{ __('Private label') }}</span>
-            </span>
-        </a>
-    </li>
+<li class="nav-item">
+    <a
+        href="{{ route('private-label.index', {REPLACE_WITH_OWNER_MODEL}) }}"
+        class="nav-link{{ Route::is('private-label.*') ? ' active' : '' }}"
+    >
+        <span class="ui-icon-text">
+            <i class="far fa-tag"></i>
+            <span>{{ __('Private label') }}</span>
+        </span>
+    </a>
+</li>
 ```
 
 ### PHP
+
 Incorporate this trait into your owner model as specified in the config:
+
 ```php
 use Mach3builders\PrivateLabel\Traits\HasPrivateLabel;
 
 use HasPrivateLabel;
 ```
+
 ### JavaScript
+
 Insert this snippet into your `app.js`:
 
 ```js
-import '@mach3builders/ui/dist/js/plugins/poller'
+import "@mach3builders/ui/dist/js/plugins/poller";
 
-$('.private-label-poller').poller({
-    running: function(target, data) {
-        switch(data.current_status) {
-            case 'dns_validating':
-                $('#dns_validating').removeClass('d-none')
-                $('#dns_validated').addClass('d-none')
-            break;
+$(".private-label-poller").poller({
+    running: function (target, data) {
+        switch (data.current_status) {
+            case "dns_validating":
+                $("#dns_validating").removeClass("d-none");
+                $("#dns_validated").addClass("d-none");
+                break;
 
-            case 'dns_validated':
-                $('#dns_validating').addClass('d-none')
-                $('#dns_validated').removeClass('d-none')
-            break;
+            case "dns_validated":
+                $("#dns_validating").addClass("d-none");
+                $("#dns_validated").removeClass("d-none");
+                break;
 
-            case 'site_installing':
-                $('#site_installing').removeClass('d-none')
-                $('#site_installed').addClass('d-none')
-            break;
+            case "site_installing":
+                $("#site_installing").removeClass("d-none");
+                $("#site_installed").addClass("d-none");
+                break;
         }
     },
     done: function (target, data) {
-        $('#site_installing').addClass('d-none')
-        $('#site_installed').removeClass('d-none')
-    }
-})
+        $("#site_installing").addClass("d-none");
+        $("#site_installed").removeClass("d-none");
+    },
+});
 ```
 
 ### Brand Customization
+
 To easily manage brand-specific elements like logos and favicons, use this `Brand.php` template:
 
 ```php
@@ -202,9 +214,11 @@ class Brand
 ```
 
 ### Label API
+
 The `label()` helper is provided by this package. Here are the methods and properties you can access:
 
 #### Properties
+
 ```php
 public string $domain;
 public string $name;
@@ -220,11 +234,14 @@ protected $statusses = [
     'site_installed',
 ];
 ```
+
 ### Events
+
 The email page gives the user the possibility to add a email to their private label. The domain of that email then gets added to the mailgun account of m3b.
 The user then has the ability to verify that this domain has been added and is verified.
 
 After the domain has been verified the `EmailDomainVerified` event gets dispatched. See the following example on how to listen to this event.
+
 ```PHP
 protected $listen = [
     // ...
@@ -235,9 +252,11 @@ protected $listen = [
 ```
 
 ### Authorization
+
 Use the `viewPrivateLabel` gate for secure access. Add this to your `AuthServiceProvider.php`:
+
 ```PHP
-function boot() 
+function boot()
 {
     // ...
     return Gate::define('viewPrivateLabel', function ($user, $owner_id) {
@@ -248,8 +267,10 @@ function boot()
 ```
 
 ### Methods
+
 The following method returns the owner of the private label.
 This corresponds with the owner model set in the config
+
 ```php
 public function owner()
 ```
@@ -267,23 +288,27 @@ public function registerMediaCollections(): void
 ```
 
 ### Commands
+
 The packages comes with 2 commands, one to update all php versions of the private labels and one to reinstall all private labels on the forge server.
 
-
 #### Reinstall labels
+
 the following command will reinstall all private labels on the forge server. The private label will be updated to status `dns_validating` and will go trough the process of being installed on the server.
 
-To reinstall all labels use: 
+To reinstall all labels use:
+
 ```bash
 php artisan label:reinstall
 ```
 
 To reinstall a specific label use:
-```bash 
+
+```bash
 php artisan label:reinstall --label=LABEL_ID
 ```
 
 #### Update label php versions
+
 The following command will update all the php versions of the private labels. The php version will be updated to the latest version available on the forge server. Or to the version specified in the prompts asked to the user when running the command
 
 ```bash
@@ -297,12 +322,15 @@ composer test
 ```
 
 ## Code styling
+
 All code should be styled using the following command:
+
 ```bash
 composer pint
 ```
 
-### Installing caddy on the server
+### Installing Caddy on the server
+
 The private label will rely on caddy to handle the ssl.
 The main app will also need to be running on port 8080.
 
@@ -310,6 +338,7 @@ To make the main app run on 8080, change the nginx of the main app to listen on 
 Change this in the ngin config, this can be done trough forge >> site >> >> edit files >> edit nginx
 
 New way
+
 ```nginx
 server {
     listen 8080 default_server;
@@ -318,8 +347,8 @@ server {
 }
 ```
 
-
 Default way for https
+
 ```nginx
 server {
     listen 443 ssl http2;
@@ -329,6 +358,7 @@ server {
 ```
 
 Default way for http
+
 ```nginx
 server {
     listen 80 ssl http2;
@@ -347,25 +377,29 @@ sudo rm 000-catch-all
 ```
 
 Restart the nginx service trough forge, or with the following command
+
 ```bash
 sudo service nginx restart
 ```
 
 To check if the app now runs on 8080 run the following command
+
 ```bash
 sudo lsof -i -P -n
 ```
 
 You will see all the ports listening on the server, check for  
-```TCP *:8080 (LISTEN)``` This is good!
-```TCP *:80 (LISTEN)``` This is bad...
+`TCP *:8080 (LISTEN)` This is good!
+`TCP *:80 (LISTEN)` This is bad...
 
 If you still see :80, then check all the above again.
 
 ### Next step is to install Caddy on the server
+
 Follow [https://caddyserver.com/docs/install#debian-ubuntu-raspbian](https://caddyserver.com/docs/install#debian-ubuntu-raspbian)
 
 After this overwrite the Caddyfile at `/etc/caddy/Caddyfile` with the following content
+
 ```caddy
 # Global options block
 {
@@ -402,11 +436,13 @@ Small note, the `allowed-domains` endpoint should return a 200 if the domain is 
 The allowed domains endpoint receives a `domain` GET parameter.
 
 Test the code
+
 ```bash
 curl "https://test-app.mach3cart.nl/caddy/allowed-domains?domain=test-label.sellwise.io"
 ```
 
 Example code
+
 ```php
 Route::get('/caddy/allowed-domains', function (Request $request) {
     $domain = $request->query('domain');
@@ -417,4 +453,13 @@ Route::get('/caddy/allowed-domains', function (Request $request) {
 
     return response('', 403);
 });
+```
+
+### Trouble Shooting Caddy
+
+When some SSL's can not be generated for certain domains, you can do this:
+
+```bash
+sudo rm -rf /var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/
+sudo systemctl restart caddy
 ```
