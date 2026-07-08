@@ -331,135 +331,102 @@ composer pint
 
 ### Installing Caddy on the server
 
-The private label will rely on caddy to handle the ssl.
-The main app will also need to be running on port 8080.
+The private label will rely on Caddy to handle SSL.
+The main app will also need to be running on port `8080`.
 
-To make the main app run on 8080, change the nginx of the main app to listen on 8080.
-Change this in the ngin config, this can be done trough forge >> site >> >> edit files >> edit nginx
+To make the main app run on `8080`, change the Nginx configuration of the main app. This can be done through **Forge → Site → Edit Files → Edit Nginx**.
 
-New way
+New configuration:
 
 ```nginx
 server {
     listen 8080 default_server;
     listen [::]:8080 default_server;
-    ....
+    ...
 }
 ```
 
-Default way for https
+Default HTTPS configuration:
 
 ```nginx
 server {
     listen 443 ssl http2;
     listen [::]:443 ssl http2;
-    ....
+    ...
 }
 ```
 
-Default way for http
+Default HTTP configuration:
 
 ```nginx
 server {
-    listen 80 ssl http2;
-    listen [::]:80 ssl http2;
-    ....
+    listen 80;
+    listen [::]:80;
+    ...
 }
 ```
 
-Also comment out the first line of the nginx config
+Also comment out the first line of the Nginx config.
 
-Then ssh into the server and remove the 000-catch-all symlink in /etc/nginx/sites-enabled
+Then SSH into the server and remove the `000-catch-all` symlink from /etc/nginx/sites-enabled:
 
 ```bash
 cd /etc/nginx/sites-enabled
 sudo rm 000-catch-all
 ```
 
-Restart the nginx service trough forge, or with the following command
+If present, also disable the default Nginx site so it no longer listens on port 80:
+
+```bash
+sudo mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.old
+```
+
+If you are using Forge, remove the generated `ssl_redirect.conf` for the site. Caddy already handles the HTTP → HTTPS redirect, so this configuration is no longer needed. Either remove it or rename it:
+
+```bash
+sudo mv /etc/nginx/forge-conf/<site-id>/<domain>/before/ssl_redirect.conf \
+/etc/nginx/forge-conf/<site-id>/<domain>/before/ssl_redirect.conf.old
+```
+
+Restart Nginx:
 
 ```bash
 sudo service nginx restart
 ```
 
-To check if the app now runs on 8080 run the following command
+Verify that there are no remaining `listen 80` directives:
+
+```bash
+sudo nginx -T | grep -n "listen .*80"
+```
+
+Check the listening ports:
 
 ```bash
 sudo lsof -i -P -n
 ```
 
-You will see all the ports listening on the server, check for  
-`TCP *:8080 (LISTEN)` This is good!
-`TCP *:80 (LISTEN)` This is bad...
+Expected result:
 
-If you still see :80, then check all the above again.
+- `TCP *:8080 (LISTEN)` ✅ Nginx
+- `TCP *:80 (LISTEN)` ❌ Nginx should **not** be listening here
 
-### Next step is to install Caddy on the server
+If Nginx is still listening on port 80, check for any remaining `listen 80` directives before continuing.
 
-Follow [https://caddyserver.com/docs/install#debian-ubuntu-raspbian](https://caddyserver.com/docs/install#debian-ubuntu-raspbian)
+### Laravel configuration
 
-After this overwrite the Caddyfile at `/etc/caddy/Caddyfile` with the following content
+Since Caddy terminates SSL, Laravel must trust the proxy and generate HTTPS URLs.
 
-```caddy
-# Global options block
-{
-    on_demand_tls {
-        ask https://test-app.mach3cart.nl/caddy/allowed-domains # API endpoint to validate the incoming domain
-    }
-}
-
-# Main app configuration
-test-app.mach3cart.nl {
-    tls info@mach3builders.nl
-
-    # Forward to NGINX or app
-    reverse_proxy localhost:8080
-}
-
-# Catch-all for custom subdomains
-:443 {
-    tls {
-        on_demand
-    }
-
-    # Forward traffic to NGINX or app
-    reverse_proxy localhost:8080
-}
-
-# Redirect all HTTP traffic to HTTPS globally
-http:// {
-    redir https://{host}{uri}
-}
-```
-
-Small note, the `allowed-domains` endpoint should return a 200 if the domain is allowed.
-The allowed domains endpoint receives a `domain` GET parameter.
-
-Test the code
-
-```bash
-curl "https://test-app.mach3cart.nl/caddy/allowed-domains?domain=test-label.sellwise.io"
-```
-
-Example code
+In `bootstrap/app.php`:
 
 ```php
-Route::get('/caddy/allowed-domains', function (Request $request) {
-    $domain = $request->query('domain');
-
-    if (in_array($domain, ['test-label.sellwise.io'])) {
-        return response('', 200);
-    }
-
-    return response('', 403);
+->withMiddleware(function (Middleware $middleware): void {
+    $middleware->trustProxies(at: '*');
 });
 ```
 
-### Trouble Shooting Caddy
+In `AppServiceProvider`:
 
-When some SSL's can not be generated for certain domains, you can do this:
-
-```bash
-sudo rm -rf /var/lib/caddy/.local/share/caddy/certificates/acme-v02.api.letsencrypt.org-directory/
-sudo systemctl restart caddy
+```php
+URL::forceHttps($this->app->environment('staging', 'production'));
 ```
